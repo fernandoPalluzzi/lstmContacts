@@ -1,0 +1,119 @@
+## filename: tfenv.yml
+
+## Environment File Definition
+
+name: tfgpu_env # tensorflow-gpu environment
+channels:
+  - conda-forge
+  - anaconda
+  - default
+dependencies:
+  - python=3.8
+  ## Core Necessities
+  - numpy # -c conda-forge, anaconda
+  - pandas # -c conda-forge, anaconda
+  - tabulate # -c conda-forge, anaconda  # necessary for df.to_markdown() in pandas
+  - scipy # -c conda-forge, anaconda
+  - matplotlib # -c conda-forge, anaconda
+  ## Jupyter Related
+  - jupyter # -c anaconda, conda-forge
+  - jupyterlab # -c anaconda, conda-forge
+  - jupyter_dashboards # -c conda-forge  (see: https://medium.com/plotly/introducing-jupyterdash-811f1f57c02e)
+  - jupyter_contrib_nbextensions # -c conda-forge
+  ## Progressbar
+  - tqdm # -c conda-forge, anaconda
+  ## Machine Learning
+  - tensorflow-gpu # -c anaconda | version: 2.4.1 (linux), 2.3.0 (windows)
+  # - tensorflow # -c anaconda | version: 2.2.0 (linux), 2.1.0 (windows)
+  - cudnn # -c conda-forge | version: 8.1.0.77 (linux/windows)
+  #       # -c anaconda | version: 7.6.5 (linux/windows)
+  - cudatoolkit # -c conda-forge | version: 8.1.0.77 (linux/windows)
+  #             # -c anaconda | version: 11.0.221 (linux/windows)
+  - scikit-learn # -c conda-forge, anaconda
+  ## Hyperparameter Optimization
+  - optuna # -c conda-forge # works for pytorch, tf/keras, mxnet, scikit-learn, xgboost, lightgbm
+  - keras-tuner # -c conda-forge
+  ## Image Processing
+  - opencv # -c conda-forge, anaconda
+  - imageio # -c anaconda, conda-forge
+  ## Image Augmentation
+  - albumentations # -c conda-forge
+  - imgaug # -c conda-forge
+  ## Code Linting
+  - pylint # -c conda-forge, anaconda
+  - autopep8 # -c conda-forge, anaconda
+  ## Installations with pip
+  - pip:
+    ## Web App Framework
+    # - Flask-Testing
+    - streamlit # https://docs.streamlit.io/en/stable/troubleshooting/clean-install.html
+
+
+# Instructions
+#-----------------------------------------------------------
+#
+# conda env create -f tfenv.yml
+#
+## For an environment installed locally (under: ./.venv)
+# mkdir -p .venv && cd .venv
+# conda env create --prefix . -f ../environment.yml
+## For Updating local environment
+# cd .venv
+# conda env update --prefix . -f ../environment.yml  --prune
+#
+## For an environment installed globally
+## with a name: fav_env 
+# NOTE: The env-name is stored inside the 
+#       environment.yml file.
+# conda env create -f environment.yml
+## For Updating global environment from env-file
+# conda env update -f ./environment.yml  --prune
+#
+## Update conda itself
+# conda update -n base -c defaults conda
+#
+## Creating a global environment in one-line: py37, py38
+# conda create -n py37 python=3.7
+# conda create -n py38 python=3.8
+#
+### In each of the envs: base, py37, py38
+# conda install jupyter jupyterlab numpy scipy pandas matplotlib scikit-learn scikit-image tqdm plotly imageio requests pylint autopep8 tabulate opencv
+#
+## Export a platform independent copy of an environment
+#  conda env export --from-history > path/to/environment.yml
+### Make exports directory (if not present already) and export
+# $targetDir = conda_exports
+# mkdir ./$targetDir
+# conda env export --from-history > ./$targetDir/exported_environment.yml
+#
+#
+# Possible required installation: conda install cudatoolkit
+# 
+# Supplementary libraries: 
+# 
+# wget https://developer.download.nvidia.com/compute/cuda/repos/$distro/$arch/cuda-keyring_1.0-1_all.deb
+# sudo dpkg -i cuda-keyring_1.0-1_all.deb
+# 
+### Could not load dynamic library 'libcudart.so.11.0'
+#
+# wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin --no-check-certificate
+# sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
+# sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/7fa2af80.pub
+# sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/ /"
+# sudo apt-get update
+# 
+# sudo apt-get install cuda-11-7 libcudnn8 libcudnn8-dev
+#
+# dpkg -l | grep -i nvidia
+# 
+# sudo dpkg-reconfigure nvidia-dkms-515
+# A modprobe blacklist file has been created at /etc/modprobe.d to prevent Nouveau
+# from loading. This can be reverted by deleting the following file:
+# /etc/modprobe.d/nvidia-graphics-drivers.conf
+# 
+# A new initrd image has also been created. To revert, please regenerate your
+# initrd by running the following command after deleting the modprobe.d file:
+# `/usr/sbin/initramfs -u`
+# 
+# sudo apt install --reinstall nvidia-driver-515
+#
