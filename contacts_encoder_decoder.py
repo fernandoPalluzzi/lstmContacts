@@ -15,29 +15,6 @@ from keras.models import Model
 from keras.utils import to_categorical
 
 
-
-#filename = "/home/fernando/contactsCore/contactLibrary_t5.txt"
-#variant = "beta"
-#antibody = "7kmg"
-#residue = "h.R50"
-#sep = "\t"
-#lineterm = "\n"
-#group = 1
-
-#clib.loc[(clib['antibody'] == "7kmg") & (clib['variant'] == "wt")]
-#clib[["a", "y"]][(clib['antibody'] == "7kmg") & (clib['variant'] == "wt")]
-#clib[["a", "y"]][(clib['antibody'].isin(["7kmg"])) & (clib['variant'].isin(["wt"]))]
-
-
-#filename = "~/contactsCore/contactLibrary_t5.txt"
-#variant = "beta, omicron, delta, wt"
-#antibody = "7kmg, 7cm4, 7l7d"
-#residue = None
-#group = None
-#sep = "\t"
-#lineterm = "\n"
-
-
 def contactLibrary(clib = None, filename = None, variant = None,
                    antibody = None, residue = None, group = None,
                    sep = "\t", lineterm = "\n", keepAttrs = True):
@@ -82,11 +59,6 @@ def contactLibrary(clib = None, filename = None, variant = None,
 		w = [i for i in u if i not in v]
 		L = eval(keep + g)		
 	return L, V
-
-
-#t = 50
-#n0 = 6
-#n1 = 3
 
 
 def randomSequence(length, u):
@@ -162,7 +134,7 @@ def onehotDecode(encoded):
 	return [argmax(x) for x in encoded]
 
 
-def define_models(n0, n1, u):
+def lstmModel(n0, n1, u):
 	
 	# Training encoder
 	encoder_inputs = Input(shape = (None, n0))
@@ -191,7 +163,7 @@ def define_models(n0, n1, u):
 	return model, encoder_model, decoder_model
 
 
-def predict_sequence(encoder, infdec, source, t, n):
+def tspredict(encoder, decoder, source, t, n):
 	
 	# Encoding
 	state = encoder.predict(source)
@@ -210,133 +182,45 @@ def predict_sequence(encoder, infdec, source, t, n):
 	return array(output)
 
 
+def lstmTraining(data, n, units = 128, epochs = 100):
+	
+	model, encoder, decoder = lstmModel(n, n, units)
+	model.compile(optimizer = 'adam', loss = 'categorical_crossentropy',
+	              metrics = ['accuracy'])
+	X1, X2, y = getDataset(data[1])
+	#print(X1.shape, X2.shape, y.shape)
+	print("# source.shape, target.shape")
+	print(X1.shape, y.shape)
+	model.fit([X1, X2], y, epochs = epochs)
+	return model, encoder, decoder
 
 
-
-# -- RUN ------------------------------------------------------------ #
-
-n_features = 101
-t0 = 5
-t1 = 5
-
-# Model
-model, encoder, decoder = define_models(n_features, n_features, 128)
-model.compile(optimizer = 'adam', loss = 'categorical_crossentropy',
-              metrics = ['accuracy'])
-
-
-# Training set
-
-"""
-X1, X2, y = getRandomset(n0 = t0, n1 = t1, t = n_features, n = 26100)
-#X1, X2, y = getRandomset(n0 = t0, n1 = t1, t = n_features, n = 26100, w = 1)
-print(X1.shape, X2.shape, y.shape)
-"""
-
-#clib = contactLibrary(filename = "~/contactsCore/contactLibrary_t5.txt")
-#clib = contactLibrary(filename = "~/contactsCore/contactLibrary_t5.txt", variant = "beta", antibody = "7kmg")
-
-#X1, X2, y = getDataset(clib[0])
-#print(X1.shape, X2.shape, y.shape)
-
-#V1, V2, Vy = getDataset(clib[1])
-#print(V1.shape, V2.shape, Vy.shape)
-
-#tset = contactLibrary(filename = "~/contactsCore/contactLibrary_t5.txt", group = 1)
-#tset = contactLibrary(filename = "~/contactsCore/contactLibrary_t5.txt", variant = "beta")
-#tset = contactLibrary(filename = "~/contactsCore/contactLibrary_t5.txt", variant = "beta", antibody = "7kmg")
-tset = contactLibrary(filename = "~/contactsCore/contactLibrary_t5.txt", variant = "beta, omicron, delta, wt", antibody = "7kmg, 7cm4, 7l7d")
-#tset = contactLibrary(filename = "~/contactsCore/contactLibrary_t5.txt", variant = "wt, delta, omicron", antibody = "7l7d")
-
-X1, X2, y = getDataset(tset[0])
-#X1, X2, y = getDataset(tset[1])
-print(X1.shape, X2.shape, y.shape)
-
-
-# Model training
-
-#model.fit([X1, X2], y, epochs = 5)
-#model.fit([X1, X2], y, epochs = 10)
-model.fit([X1, X2], y, epochs = 100)
-#model.fit([V1, V2], Vy, epochs = 80)
-#model.fit([V1, V2], Vy, epochs = 100)
-
-# Performances
-
-"""
-total, correct = 100, 0
-
-for _ in range(total):
-	X1, X2, y = getRandomset(n0 = t0, n1 = t1, t = n_features, n = 1)
-	target = predict_sequence(encoder, decoder, X1, t1, n_features)
-	if array_equal(onehotDecode(y[0]), onehotDecode(target)):
-		correct += 1
-
-print('Accuracy: %.2f%%' % (float(correct)/float(total)*100.0))
-"""
-
-
-vset = contactLibrary(filename = "~/contactsCore/contactLibrary_t5.txt", variant = "beta", antibody = "7kmg")
-#vset = contactLibrary(filename = "~/contactsCore/contactLibrary_t5.txt", variant = "wt", antibody = "7l7d")
-#vset = contactLibrary(filename = "~/contactsCore/contactLibrary_t5.txt", variant = "delta", antibody = "7l7d")
-
-V1, V2, Vy = getDataset(vset[1])
-print(V1.shape, V2.shape, Vy.shape)
-
-
-N, T = len(V1), 0
-maxdist = 5
-maxsum = 15
-profile = []
-
-for i in range(N):
-	target = predict_sequence(encoder, decoder, V1[[i]], t1, n_features)
-	y_hat = onehotDecode(target)
-	profile += y_hat
-	y_encoded = onehotDecode(Vy[[i]][0])
-	d = [abs(y_hat[j] - y_encoded[j]) for j in range(len(y_hat))]
-	if max(d) <= maxdist and sum(d) <= maxsum:
-		T += 1
-
-print('Accuracy:', str(round(100*float(T)/float(N), 3)) + '%')
-
-chunk = 100
-profile = [profile[i:i+chunk] for i in range(0, len(profile), chunk)]
-profile = array([array(x) for x in profile])
-#profile = mean(profile, axis = 0)
-profile = median(profile, axis = 0)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-total, correct = len(X1[:100]), 0
-
-for i in range(total):
-	target = predict_sequence(infenc, infdec, V1[[i]], n_steps_out, n_features)
-	if array_equal(onehotDecode(y[[i]][0]), onehotDecode(target)):
-		correct += 1
-
-print('Accuracy: %.2f%%' % (float(correct)/float(total)*100.0))
-
-
-# Prediction
-
-#for _ in range(10):
-#	X1, X2, y = get_dataset(n_steps_in, n_steps_out, n_features, 1)
-#	target = predict_sequence(infenc, infdec, X1, n_steps_out, n_features)
-#	print('X=%s y=%s, yhat=%s' % (one_hot_decode(X1[0]), one_hot_decode(y[0]), one_hot_decode(target)))
-
-
-
+def lstmProfile(data, encoder, decoder, t0, t1, n, maxdist = 5,
+                maxsum = 15, chunk = 100, method = "median"):
+	
+	V1, V2, Vy = getDataset(data[1])
+	#print(V1.shape, V2.shape, Vy.shape)
+	print("# source.shape, target.shape")
+	print(V1.shape, Vy.shape)
+	
+	N, T = len(V1), 0
+	profile = []
+	
+	for i in range(N):
+		target = tspredict(encoder, decoder, V1[[i]], t1, n)
+		y_hat = onehotDecode(target)
+		profile += y_hat
+		y_encoded = onehotDecode(Vy[[i]][0])
+		d = [abs(y_hat[j] - y_encoded[j]) for j in range(len(y_hat))]
+		if max(d) <= maxdist and sum(d) <= maxsum:
+			T += 1
+	
+	print('Accuracy:', str(round(100*float(T)/float(N), 3)) + '%')
+	
+	profile = [profile[i:i+chunk] for i in range(0, len(profile), chunk)]
+	profile = array([array(x) for x in profile])
+	if method == "median":
+		profile = median(profile, axis = 0)
+	elif method == "mean":
+		profile = mean(profile, axis = 0)
+	return profile
