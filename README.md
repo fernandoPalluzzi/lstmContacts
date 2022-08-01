@@ -322,7 +322,7 @@ Once the contact/AAC search has been done, the affinity time series (here called
 
 ## 2.1. Manual extraction using the search module
 
-Profiles can be extracted and drawn from both single contacts and entire AACs, based on the search results. In both cases, the extraction can be done with the `extractProfiles()` function. In case of a single contact, with an exact match, the extracted profile can be often a single vector (i.e., a single antigen-antibody contact matches the search). As a first example, we will see what a stable (x0) and an unstable (x1) contact look like.
+Profiles can be extracted and drawn from both single contacts and entire AACs, based on the search results. In both cases, the extraction can be done with the `extractProfiles()` function. In case of a single contact, with an exact match, the extracted profile can be often a single vector (i.e., a single antigen-antibody contact matches the search). As a first example, we will generate a profile for a single stable (x0) and unstable (x1) contact.
 
 ```r
 # Define the input contact
