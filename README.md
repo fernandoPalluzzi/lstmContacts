@@ -287,6 +287,7 @@ R <- contacts(x)
 Warnings are automatically disabled, and a collective output is generated:
 
 ```
+> R
 $antibody
 [1] "7kmg" "7cm4" "7l7d"
 
