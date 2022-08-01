@@ -1,11 +1,13 @@
 # lstmContacts
 The **lstmContacts** software characterizes and draws atigen-antibody interaction profiles based on a library of known contacts. The software has two main modules: the contact similarity search module (R module) and the prediction module, based on long-short term memory (LSTM) recurrent neural networks (Python module). The R module takes the input antigen-antibody complex and generates an affinity contact library that can be used by the LSTM module for the refinement/prediction of an interaction time series.
 
-## 1.1. Requirements and installation
+## Requirements and installation
 
 ...
 
-## 1.2. Internal representation of an antigen-antibody complex
+# 1. Antigen-Antibody Complex search module
+
+## 1.1. Internal representation of an antigen-antibody complex
 
 The input antigen-antibody **complex** (AAC) is represented by a list x = [x1, x2, …, xn] of n **contacts**. Each j-th contact is a vector xj = [x0j, x1j, …, xmj] of mj elements, where x0j is the antibody residue interacting with the x1j, …, xmj residues on the surface of the receptor binding domain (RBD) of the Spike protein variant. Every contact corresponds univocally to a vector ai = affinity(xj) of 101 affinity score values, ranging from 0 to 1, and corresponding to the 101 nanoseconds of the molecular dynamics simulation stored in the internal library (object `contact.data`). In the internal library, antibodies are reported with the corresponding protein data bank ([**PDB**](https://www.rcsb.org/)) 3D structure ID: 7kmg (Bamlanivimab, Ly-Cov555), 7c01 (Etesevimab, Ly-Cov016), 7cm4 (Regdanvimab, CTP-59), 7l7d (Tixagevimab, AZD8895), 7l7e (Cilgavimab, AZD1061), 7r6w (Sotrovimab), 6zcz (EY6A). The variants of the library for which a molecular dynamic simulation is available include: *wt*, *alpha*, *beta*, *delta*, *omicron*. The input AAC wil be searched, both exactly and by similarity, against these data.
 
@@ -119,7 +121,7 @@ Secondly, to find the antigen variants that best fit the input complex, raw resu
 21 omicron Y505   H505  aromatic        basic
 ```
 
-## 1.3. Contact search
+## 1.2. Contact search
 
 First, we need to open an R console and load the needed functions (lstmContacts requires only the basic R environment, version >= 4.0):
 
@@ -267,7 +269,7 @@ $hotspot
 
 The output shows how the current input yields only a similarity match within the internal library (this is expected for an unknown variant). Although acceptable, the search results raise a high warning level (11/15). Multiple antibodies (7cm4, 7l7e, 6zcz, 7r6w) could establish an effective contact with the input, although some hotspots were found: residues W455, M492, and L493 cannot be covered by any of the available antibodies. In addition, multipe variants match the input contact (omicron and wt). Although multiple variant match is generally ininfluent for the time series prediction (and somehow expected for an unknown variant), it might lead to a reduced specificity.
 
-## 1.4. Antigen-Antibody Complex search
+## 1.3. Antigen-Antibody Complex search
 
 The user may search for an entire AAC, specifying it as reported in section 1.1. Eamples of known complexes are available within the `contact.map` object, for each of the available antibodies. In case of an AAC search, we will use the `contacts()` function, thet iteratively applies the `preprocess()` function. Let us see a quick example:
 
@@ -310,7 +312,9 @@ $contact.level
 
 This complex can be established by three different antibodies (7kmg, 7cm4, 7l7d) with four variants (beta, omicron, delta, wt). The antibody residues taking part to the AAC are listed by the `ab.residues` attribute. The majority class is always the second and the contact level is always 3 (i.e., exact match), meaning that this is a high quality search result. In addition, the warning level vary from 0 to 6 (i.e., always < 8), confirming that all the contacts were found within the internal library.
 
-## 1.5. Extracting and drawing an affinity profile (non-LSTM manual procedure)
+# 2. Extracting and drawing an affinity profile
+
+## 2.1. Manual extraction using the search module (non-LSTM solution)
 
 Affinity time series (here called "profiles") can be extracted and drawn from both single contacts and entire AACs, based on the search results. In both cases, the extraction can be done with the `extractProfiles()` function. In case of a single contact, with an exact match, the extracted profile can be often a single vector (i.e., a single antigen-antibody contact matches the search). In the example below we will see an example of a stable (x0) and an unstable (x1) contact.
 
