@@ -366,7 +366,7 @@ The `extractProfile()` function takes a contact library as input (either the int
 ![alt text](https://github.com/fernandoPalluzzi/lstmContacts/blob/main/figures/lstmContacts_manual_contact_drawing.png)
 
 The x axis is the time dimension (101 nanoseconds) and the y axis reports the affinity score of the complex per time step. The affinity score ranges from 0 to 1 and allow us to evaluate the stability of the complex. Given the contact data library, it is possible to estimate an affinity score threshold such that, if the trend of the time series drops below the threshold, the AAC is classified as *unstable* and the antibody is expected to release from the antigen within 101 nanoseconds. The exact procedure to estimate this threshold is explained in section 2.3.
-To evaluate if the global trend of a profile is either above or below the threshold, we can simply use its median value. In the figure above, the median affinity of the stable contact (blue) is above the threshold (dotted black line at 0.88), while it is below the threshold for the unstable one (red).
+To evaluate if the global trend of a profile is either above or below the threshold, we can simply use its median value. In the figure above, the median affinity of the stable contact (blue) is above the threshold (dotted black line at 0.88), while the unstable one (red) is below the threshold.
 
 
 ## 2.2. The LSTM module
