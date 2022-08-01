@@ -318,9 +318,11 @@ This complex can be established by three different antibodies (7kmg, 7cm4, 7l7d)
 
 # 2. Extracting and drawing an affinity profile
 
+Once the contact/AAC search has been done, the affinity time series (here called "profile") can be extracted in two ways: (i) the time series can be either manually inspected and drawn using the R module, or (ii) data and information from the search can be passed to the LSTM module for an automated profile drawing/prediction.
+
 ## 2.1. Manual extraction using the search module (non-LSTM solution)
 
-Affinity time series (here called "profiles") can be extracted and drawn from both single contacts and entire AACs, based on the search results. In both cases, the extraction can be done with the `extractProfiles()` function. In case of a single contact, with an exact match, the extracted profile can be often a single vector (i.e., a single antigen-antibody contact matches the search). In the example below we will see an example of a stable (x0) and an unstable (x1) contact.
+Profiles can be extracted and drawn from both single contacts and entire AACs, based on the search results. In both cases, the extraction can be done with the `extractProfiles()` function. In case of a single contact, with an exact match, the extracted profile can be often a single vector (i.e., a single antigen-antibody contact matches the search). In the example below we will see an example of a stable (x0) and an unstable (x1) contact.
 
 ```r
 # Define the input contact
