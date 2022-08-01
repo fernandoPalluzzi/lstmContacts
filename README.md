@@ -359,3 +359,7 @@ lines(profile1, type = "l", lwd = 4, col = "red3")
 abline(h = 0.88, lwd = 5, lty = 3)
 dev.off()
 ```
+
+## 2.2. The LSTM module
+
+...
