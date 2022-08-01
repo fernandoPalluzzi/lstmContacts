@@ -348,7 +348,8 @@ profile1 <- extractProfiles(data = contact.data,
                             stochastic = TRUE)
 
 # Drawing the output profile
-png("~/lstmContacts_naive_contact_prediction.png", width = 20, height = 10, units = 'in', res = 400)
+png("~/lstmContacts_naive_contact_prediction.png", width = 20, height = 10,
+    units = 'in', res = 400)
 plot(profile0, type = "l", lwd = 4, col = "blue",
      ylim = c(0, 1),
      xlab = "nanoseconds",
@@ -360,7 +361,7 @@ abline(h = 0.88, lwd = 5, lty = 3)
 dev.off()
 ```
 
-
+![alt text](https://github.com/fernandoPalluzzi/SEMgraph/blob/master/docs/figures/Figure5.png)
 
 ## 2.2. The LSTM module
 
