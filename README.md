@@ -135,6 +135,12 @@ x <- c("h.R105", "Y449", "L455", "L492", "Q493", "S494")
 
 # Search
 R <- preprocess(x)
+```
+
+The `preprocess` function prints out a summary composed by four messages:
+
+```
+R <- preprocess(x)
 ### p
 1.09261696547824
 4.36452855190691
@@ -145,7 +151,6 @@ R <- preprocess(x)
 ###  Contact match: exact
 ```
 
-The `preprocess` function prints out a summary composed by four messages:
 - the value of the interaction class odds-ratio (p);
 - the selected majority class based on p;
 - the warning level (0-7 [ok], 8-14 [suboptimal], 15 [unreliable]);
