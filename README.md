@@ -361,7 +361,7 @@ abline(h = 0.88, lwd = 5, lty = 3)
 dev.off()
 ```
 
-![alt text](https://github.com/fernandoPalluzzi/SEMgraph/blob/master/docs/figures/Figure5.png)
+![alt text](https://github.com/fernandoPalluzzi/lstmContacts/blob/main/figures/lstmContacts_manual_contact_drawing.png)
 
 ## 2.2. The LSTM module
 
