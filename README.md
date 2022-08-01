@@ -239,6 +239,9 @@ $ab.residues
     7r6w 
 "h.E108" 
 
+$exact.match
+[1] "None"
+
 $similarity.match
   7cm4   7l7e   6zcz   7r6w 
 "Q493" "K444" "K386" "K356" 
@@ -260,9 +263,6 @@ $variant
 
 $hotspot
 [1] "W455" "M492" "L493"
-
-$exact.match
-[1] "None"
 ```
 
 The output shows how the current input yields only a similarity match within the internal library (this is expected for an unknown variant), with a high warning level (11/15). Multiple antibodies (7cm4, 7l7e, 6zcz, 7r6w) could establish an effective contact with the input, although some hotspots have been found: residues W455, M492, L493 cannot be covered by any of the available antibodies. In addition, multipe variants match the input contact (omicron and wt). Although this is generally ininfluent for the time series prediction, it could be a sign of a reduced specificity.
