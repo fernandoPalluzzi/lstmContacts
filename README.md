@@ -127,7 +127,7 @@ First, we need to open an R console and load the needed functions (lstmContacts 
 source("~/lstmContacts/contacts.R")
 ```
 
-The lstmContact software allows to search for a single contact, through the `preprocess(x)` function:
+The lstmContacts software allows to search for a single contact, through the `preprocess(x)` function:
 
 ```r
 # Define a contact
