@@ -1,7 +1,7 @@
 # lstmContacts
 The **lstmContacts** software characterizes and draws atigen-antibody interaction profiles based on a library of known contacts.
 
-## 1.1. Installation
+## 1.1. Requirements and installation
 
 ...
 
@@ -21,9 +21,9 @@ x <- list(x1 = c("h.R50", "V483", "E484"),
           x7 = c("l.R96", "V483", "E484"))
 ```
 
-In the example above, `x` is the AAC and each vector in `x` is a contact. The first element of each contact is always the amino acid residue of the antibody, defined by the FAB chain (h for "heavy" and l for "light"), followed by a dot, the single letter code of the residue, and its position in the polypeptide chain. The other elements of a contact are the antigen residues interacting with the antibody one.
+In the example above, `x` is the AAC and each vector in `x` is a contact. The first element of each contact is always the amino acid residue of the antibody, defined by the FAB chain ("h" for "heavy" and "l" for "light"), followed by a dot, the single letter code of the residue, and its position in the polypeptide chain. The other elements of a contact are the antigen residues interacting with the antibody one.
 
-The `preprocess(vj)` function of the R module assigns the best possible ai vector to the j-th contact. If the dynamics for vj are in our contact library, the assignment is referred to as an *exact match*. Otherwise, the [x0j, x1j, …, xmj] residues of the vj contact are searched by similarity. Each residue xkj (with k = 0, 1, …, m) is firstly searched in a nearby position of the polypeptide chain. If this search fails, the algorithm seeks for a residue with similar chemical properties (referred to as "group"), according to the table below (`contact.groups` object).
+The `preprocess(vj)` function of the R module assigns the best possible ai vector to the j-th contact. If the dynamics for vj are in our contact library, the assignment is referred to as an *exact match*. Otherwise, the [x0j, x1j, …, xmj] residues of the vj contact are searched by similarity. Each residue xkj (with k = 0, 1, …, m) is firstly searched in a nearby position of the polypeptide chain. If this search fails, the algorithm seeks for a residue with similar chemical properties (referred to as "group"), according to the table below (`contact.groups` object). Since the dynamics are run in triplicates, the internal library has three affinity vector replicates per contact: ai1, ai2, and ai3, where ai is computed as the element-wise mean of the three vectors.
 
 ```
 > contact.groups
@@ -53,6 +53,140 @@ The `preprocess(vj)` function of the R module assigns the best possible ai vecto
 ```
 For the antibody residue x0j of vj, the similarity search is further constrained within the original FAB chain (either *heavy* or *light*). A warning level based on powers of 2 is used to determine the quality of the search results: 2^3 = 8, exact match failed; 2^2 = 4, residue match (with the same FAB chain as the input) failed; 2^1 = 2, group search failed; 2^0 = 1, residue match (different FAB chain from the input) failed. A warning level below 8 means that an exact match was found, whereas a warning level > 8 and < 15 indicates a non-exact match. If the warning level reaches 15, the search failed at every level and the algorithm cannot go further. This warning system enables fast user monitoring of the prediction quality. By default, the R module shows the search status, commenting on results quality in human language.
 
+Residue search is further refined by two criteria. Firstly, each contact is classified based on the available interaction class. The class of an interaction specifies which part of the surface is involved in the AAC formation. By default, the object `contact.class` specifies the four available classes (I-to-IV) for the Spike RBD-FAB interaction:
+
+```
+> contact.class
+$I
+class1 class1 class1 class1 class1 class1 class1 class1 class1 class1 class1 
+"R403" "D405" "E406" "R408" "Q409" "T415" "G416" "K417" "D420" "Y421" "Y453" 
+class1 class1 class1 class1 class1 class1 class1 class1 class1 class1 class1 
+"L455" "F456" "R457" "K458" "N460" "Y473" "A475" "G476" "S477" "F486" "N487" 
+class1 class1 class1 class1 class1 class1 class1 class1 class1 class1 
+"Y489" "Q493" "S494" "Y495" "G496" "Q498" "T500" "N501" "G502" "Y505" 
+
+$II
+class2 class2 class2 class2 class2 class2 class2 class2 class2 class2 class2 
+"R403" "D405" "K417" "G446" "Y449" "N450" "L452" "L455" "F456" "T470" "S477" 
+class2 class2 class2 class2 class2 class2 class2 class2 class2 class2 class2 
+"N481" "V483" "E484" "G485" "F486" "N487" "Y489" "F490" "L492" "Q493" "S494" 
+class2 class2 
+"Q498" "Y505" 
+
+$III
+class3 class3 class3 class3 class3 class3 class3 class3 class3 class3 class3 
+"N334" "P337" "E340" "T345" "R346" "R357" "N440" "L441" "K444" "V445" "G446" 
+class3 class3 class3 class3 class3 class3 class3 class3 class3 class3 class3 
+"G447" "N448" "Y449" "N450" "L452" "R466" "T470" "E471" "E484" "F490" "Q493" 
+class3 class3 class3 
+"Q498" "P499" "Y505" 
+
+$IV
+class4 class4 class4 class4 class4 class4 class4 class4 class4 class4 class4 
+"Y369" "N370" "S371" "A372" "S373" "F374" "S375" "T376" "F377" "K378" "C379" 
+class4 class4 class4 class4 class4 class4 class4 class4 class4 class4 class4 
+"Y380" "G381" "V382" "S383" "P384" "T385" "K386" "L390" "D405" "R408" "Q409" 
+class4 class4 class4 class4 class4 class4 class4 class4 class4 class4 
+"P412" "Q414" "D427" "D428" "F429" "T430" "N437" "V503" "G504" "Y508" 
+```
+
+Each residue is assigned (also by similarity) to one or more classes. Then the odds ratio p = odds(i-th class)/odds(not i-th class) is calculated. The contact is assigned to the class with the highest p, referred to as the "majority class". When all the contacts of a complex belong to the same class, we have a confirmation to the goodness of the search results. 
+Secondly, to find the antigen variants that best fit the input complex, raw results are further refined by checking for possible mutation hotspots. The default object `contact.mutations` contains mutational information for the Spike variants alpha, beta, delta, and omicron, with respect to the wt (wild-type) protein:
+
+```
+> contact.mutations
+   variant   wt mutant  wt.group mutant.group
+1    alpha N501   Y501     polar     aromatic
+2     beta K417   N417     basic        polar
+3     beta E484   K484    acidic        basic
+4     beta N501   Y501     polar     aromatic
+5    delta L452   R452 aliphatic        basic
+6    delta T478   K478     polar        basic
+7  omicron G339   D339      tiny       acidic
+8  omicron S371   L371     polar    aliphatic
+9  omicron S373   P373     polar       cyclic
+10 omicron S375   F375     polar     aromatic
+11 omicron K417   N417     basic        polar
+12 omicron N440   K440     polar        basic
+13 omicron G446   S446      tiny        polar
+14 omicron S477   N477     polar        polar
+15 omicron T478   K478     polar        basic
+16 omicron E484   A484    acidic    aliphatic
+17 omicron Q493   R493     polar        basic
+18 omicron G496   S496      tiny        polar
+19 omicron Q498   R498     polar        basic
+20 omicron N501   Y501     polar     aromatic
+21 omicron Y505   H505  aromatic        basic
+```
+
 ## 1.3. Contact search and complex definition
 
-...
+First, we need to open an R console and load the needed functions (lstmContacts requires only the basic R environment, version >= 4.0):
+
+```r
+source("~/lstmContacts/contacts.R")
+```
+
+The lstmContact software allows to search for a single contact, through the `preprocess(x)` function:
+
+```r
+# Define a contact
+x <- c("h.R105", "Y449", "L455", "L492", "Q493", "S494")
+
+# Search
+R <- preprocess(x)
+### p
+1.09261696547824
+4.36452855190691
+0.870856650882479
+0.007049945387747
+### Majority class: 2
+###  Warning level: 0/15 [ok]
+###  Contact match: exact
+```
+
+The `preprocess` function prints out a summary composed by four messages:
+- the value of the interaction class odds-ratio (p);
+- the selected majority class based on p;
+- the warning level (0-7 [ok], 8-14 [suboptimal], 15 [unreliable]);
+- the type of search result (*exact*: perfect contact match found in the library, *similarity*: output contact defined by similarity).
+
+The search results are stored as a list:
+
+```
+> R
+$input
+[1] "h.R105" "Y449"   "L455"   "L492"   "Q493"   "S494"  
+
+$antibody
+[1] "7cm4"
+
+$ab.residues
+    7cm4 
+"h.R105" 
+
+$exact.match
+  7cm4   7cm4   7cm4   7cm4   7cm4 
+"Y449" "L455" "L492" "Q493" "S494" 
+
+$similarity.match
+[1] "None"
+
+$class.residues
+[1] "Y449" "L455" "L492" "Q493" "S494"
+
+$class
+[1] "class2"
+
+$warning.level
+[1] 0
+
+$contact.level
+[1] 3
+
+$variant
+[1] "omicron"
+
+$hotspot
+[1] "None"
+```
