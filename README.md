@@ -265,7 +265,7 @@ $hotspot
 [1] "W455" "M492" "L493"
 ```
 
-The output shows how the current input yields only a similarity match within the internal library (this is expected for an unknown variant). Although acceptable, the search results raise a high warning level (11/15). Multiple antibodies (7cm4, 7l7e, 6zcz, 7r6w) could establish an effective contact with the input, although some hotspots have been found: residues W455, M492, L493 cannot be covered by any of the available antibodies. In addition, multipe variants match the input contact (omicron and wt). Although multiple variant match is generally ininfluent for the time series prediction (and somehow expected for an unknown variant), it might lead to a reduced specificity.
+The output shows how the current input yields only a similarity match within the internal library (this is expected for an unknown variant). Although acceptable, the search results raise a high warning level (11/15). Multiple antibodies (7cm4, 7l7e, 6zcz, 7r6w) could establish an effective contact with the input, although some hotspots were found: residues W455, M492, L493 cannot be covered by any of the available antibodies. In addition, multipe variants match the input contact (omicron and wt). Although multiple variant match is generally ininfluent for the time series prediction (and somehow expected for an unknown variant), it might lead to a reduced specificity.
 
 ## 1.4. AAC search
 
