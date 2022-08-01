@@ -1,13 +1,11 @@
 # lstmContacts
-The **lstmContacts** software characterizes and draws atigen-antibody interaction profiles based on a library of known contacts.
+The **lstmContacts** software characterizes and draws atigen-antibody interaction profiles based on a library of known contacts. The software has two main modules: the contact similarity search module (R module) and the prediction module, based on long-short term memory (LSTM) recurrent neural networks (Python module). The R module takes the input antigen-antibody complex and generates an affinity contact library that can be used by the LSTM module for the prediction.
 
 ## 1.1. Requirements and installation
 
 ...
 
 ## 1.2. Internal representation of an antigen-antibody complex
-
-The **lstmContacts** software has two main modules: the contact similarity search module (R module) and the prediction module, based on long-short term memory (LSTM) recurrent neural networks (Python module). The R module takes the input antigen-antibody complex and generates an affinity contact library that can be used by the LSTM module for the prediction.
 
 The input antigen-antibody **complex** (AAC) is represented by a list x = [x1, x2, …, xn] of n **contacts**. Each j-th contact is a vector xj = [x0j, x1j, …, xmj] of mj elements, where x0j is the antibody residue interacting with the x1j, …, xmj residues on the surface of the receptor binding domain (RBD) of the Spike protein variant. Every contact corresponds univocally to a vector ai = affinity(xj) of 101 affinity score values, ranging from 0 to 1, and corresponding to the 101 nanoseconds of the molecular dynamics simulation. Computationally, the AAC is specified as follows (R code):
 
