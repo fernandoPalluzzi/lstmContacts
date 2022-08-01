@@ -265,11 +265,65 @@ $hotspot
 [1] "W455" "M492" "L493"
 ```
 
-The output shows how the current input yields only a similarity match within the internal library (this is expected for an unknown variant). Although acceptable, the search results raise a high warning level (11/15). Multiple antibodies (7cm4, 7l7e, 6zcz, 7r6w) could establish an effective contact with the input, although some hotspots were found: residues W455, M492, L493 cannot be covered by any of the available antibodies. In addition, multipe variants match the input contact (omicron and wt). Although multiple variant match is generally ininfluent for the time series prediction (and somehow expected for an unknown variant), it might lead to a reduced specificity.
+The output shows how the current input yields only a similarity match within the internal library (this is expected for an unknown variant). Although acceptable, the search results raise a high warning level (11/15). Multiple antibodies (7cm4, 7l7e, 6zcz, 7r6w) could establish an effective contact with the input, although some hotspots were found: residues W455, M492, and L493 cannot be covered by any of the available antibodies. In addition, multipe variants match the input contact (omicron and wt). Although multiple variant match is generally ininfluent for the time series prediction (and somehow expected for an unknown variant), it might lead to a reduced specificity.
 
 ## 1.4. AAC search
 
-The user may search for an entire complex (AAC), specifying it as reported in section 1.2. Let us see a quick example:
+The user may search for an entire AAC, specifying it as reported in section 1.2. Eamples of known complexes are available within the `contact.map` object, for each of the available antibodies. In case of an AAC search, we will use the `contacts(x)` function, iteratively applying the `preprocess(xi)` function. Let us see a quick example:
 
+```r
+# Define the input AAC
+x <- list(x1 = c("h.R50", "V483", "E484"),
+          x2 = c("h.L55", "L452", "T470", "F490"),
+          x3 = c("h.Y101", "E484", "F490"),
+          x4 = c("h.R104", "Q493", "S494"),
+          x5 = c("l.Y32", "F486", "Y489"),
+          x6 = c("l.Y92", "F486", "Y489"),
+          x7 = c("l.R96", "V483", "E484"))
 
+R <- contacts(x)
+```
 
+Warnings are automatically disabled, and a collective output is generated:
+
+```
+$antibody
+[1] "7kmg" "7cm4" "7l7d"
+
+$variant
+[1] "beta"    "omicron" "delta"   "wt"     
+
+$ab.residues
+ [1] "h.R50"  "h.L55"  "h.Y101" "h.R104" "h.R105" "h.R109" "l.Y32"  "h.Y60" 
+ [9] "h.Y106" "h.Y111" "h.Y113" "h.Y33"  "h.Y50"  "h.Y92"  "l.Y92"  "l.R96" 
+
+$class
+[1] "class2"
+
+$warning.level
+[1] 6 0 4 2
+
+$contact.level
+[1] 3
+```
+
+This complex can be established by three different antibodies (7kmg, 7cm4, 7l7d) with four variants (beta, omicron, delta, wt). The antibody residues taking part to the AAC are listed by the `ab.residues` attribute. The majority class is always the second and the contact level is always 3 (i.e., exact match), meaning that this is a high quality search result. In addition, the warning level vary from 0 to 6 (i.e., always < 8), confirming that all the contacts were found within the internal library.
+
+## 1.5. Extracting and drawing an affinity profile
+
+Affinity time series (here called "profiles") can be extracted and drawn from both single contacts and entire AACs, based on the search results. In both cases, the extraction can be done with the `extractProfiles()` function. In case of a single contact, the extracted profile will be a vector:
+
+```r
+# Define the input contact
+x <- c("h.R105", "Y449", "L455", "L492", "Q493", "S494")
+
+# Contact search
+R <- preprocess(x)
+
+# Profile extraction
+profile <- extractProfiles(data = contact.data,
+                           antibody = R$antibody,
+                           variants = R$variant,
+                           residues = R$ab.residues,
+                           stochastic = TRUE)
+```
