@@ -5,7 +5,15 @@ The **lstmContacts** software characterizes and draws atigen-antibody interactio
 
 ...
 
+&nbsp;
+
 # 1. Antigen-Antibody Complex search module
+
+This module can be used by starting an R environment. The lstmContacts only requires the base R package (version >= 4.0). We can load R module functions and data using `source`:
+
+```r
+source("~/lstmContacts/contacts.R")
+```
 
 ## 1.1. Internal representation of an antigen-antibody complex
 
@@ -122,12 +130,6 @@ Secondly, to find the antigen variants that best fit the input complex, raw resu
 ```
 
 ## 1.2. Contact search
-
-First, we need to open an R console and load the needed functions (lstmContacts requires only the basic R environment, version >= 4.0):
-
-```r
-source("~/lstmContacts/contacts.R")
-```
 
 The lstmContacts software allows to search for a single contact, through the `preprocess()` function:
 
@@ -311,6 +313,8 @@ $contact.level
 ```
 
 This complex can be established by three different antibodies (7kmg, 7cm4, 7l7d) with four variants (beta, omicron, delta, wt). The antibody residues taking part to the AAC are listed by the `ab.residues` attribute. The majority class is always the second and the contact level is always 3 (i.e., exact match), meaning that this is a high quality search result. In addition, the warning level vary from 0 to 6 (i.e., always < 8), confirming that all the contacts were found within the internal library.
+
+&nbsp;
 
 # 2. Extracting and drawing an affinity profile
 
