@@ -312,19 +312,40 @@ This complex can be established by three different antibodies (7kmg, 7cm4, 7l7d)
 
 ## 1.5. Extracting and drawing an affinity profile
 
-Affinity time series (here called "profiles") can be extracted and drawn from both single contacts and entire AACs, based on the search results. In both cases, the extraction can be done with the `extractProfiles()` function. In case of a single contact, the extracted profile will be a vector:
+Affinity time series (here called "profiles") can be extracted and drawn from both single contacts and entire AACs, based on the search results. In both cases, the extraction can be done with the `extractProfiles()` function. In case of a single contact, with an exact match, the extracted profile can be often a single vector (i.e., a single antigen-antibody contact matches the search). In the example below we will see an example of a stable (x0) and an unstable (x1) contact.
 
 ```r
 # Define the input contact
-x <- c("h.R105", "Y449", "L455", "L492", "Q493", "S494")
+x0 <- c("h.R105", "Y449", "L455", "L492", "Q493", "S494")
+x1 <- c("h.L55", "L452", "T470", "F490")
 
 # Contact search
-R <- preprocess(x)
+R0 <- preprocess(x0)
+R1 <- preprocess(x1)
 
 # Profile extraction
-profile <- extractProfiles(data = contact.data,
-                           antibody = R$antibody,
-                           variants = R$variant,
-                           residues = R$ab.residues,
-                           stochastic = TRUE)
+
+profile0 <- extractProfiles(data = contact.data,
+                            antibody = R0$antibody,
+                            variants = R0$variant,
+                            residues = R0$ab.residues,
+                            stochastic = TRUE)
+
+profile1 <- extractProfiles(data = contact.data,
+                            antibody = R1$antibody,
+                            variants = R1$variant,
+                            residues = R1$ab.residues,
+                            stochastic = TRUE)
+
+# Drawing the output profile
+png("~/lstmContacts_naive_contact_prediction.png", width = 20, height = 10, units = 'in', res = 400)
+plot(profile0, type = "l", lwd = 4, col = "blue",
+     ylim = c(0, 1),
+     xlab = "nanoseconds",
+     ylab = "Affinity score",
+     cex.axis = 1.8,
+     cex.lab = 1.4)
+lines(profile1, type = "l", lwd = 4, col = "red3")
+abline(h = 0.88, lwd = 5, lty = 3)
+dev.off()
 ```
