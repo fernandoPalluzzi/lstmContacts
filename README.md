@@ -127,7 +127,7 @@ First, we need to open an R console and load the needed functions (lstmContacts 
 source("~/lstmContacts/contacts.R")
 ```
 
-The lstmContacts software allows to search for a single contact, through the `preprocess(x)` function:
+The lstmContacts software allows to search for a single contact, through the `preprocess()` function:
 
 ```r
 # Define a contact
@@ -137,7 +137,7 @@ x <- c("h.R105", "Y449", "L455", "L492", "Q493", "S494")
 R <- preprocess(x)
 ```
 
-The `preprocess` function prints out a summary composed by four messages:
+The `preprocess()` function prints out a summary composed by four messages:
 
 ```
 ### p
@@ -269,7 +269,7 @@ The output shows how the current input yields only a similarity match within the
 
 ## 1.4. AAC search
 
-The user may search for an entire AAC, specifying it as reported in section 1.2. Eamples of known complexes are available within the `contact.map` object, for each of the available antibodies. In case of an AAC search, we will use the `contacts(x)` function, iteratively applying the `preprocess(xi)` function. Let us see a quick example:
+The user may search for an entire AAC, specifying it as reported in section 1.2. Eamples of known complexes are available within the `contact.map` object, for each of the available antibodies. In case of an AAC search, we will use the `contacts()` function, iteratively applying the `preprocess()` function. Let us see a quick example:
 
 ```r
 # Define the input AAC
