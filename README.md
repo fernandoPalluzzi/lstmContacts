@@ -361,9 +361,12 @@ abline(h = 0.88, lwd = 5, lty = 3)
 dev.off()
 ```
 
+The `extractProfile()` function takes a contact library as input (either the internal library or any othe dataset with the same format), and the list of antibody, variants and residues from the search step. A molecular dynamics simulation is affected by local force field modifications driving the time series to different destinies at each run. Generally, the higher the instability of a contact, the higher the variability among its replicates. The `extractProfile()` function defines the profile such that the affinity value a(t) at nanosecond t is the mean m(t) of the affinity values among replicates plus a random value s(t) between -SD(t) and SD(t), were SD = standard deviation. If the argument `stochastic` is FALSE, s(t) is fixed to 0.
+
 ![alt text](https://github.com/fernandoPalluzzi/lstmContacts/blob/main/figures/lstmContacts_manual_contact_drawing.png)
 
 The x axis is the time dimension (101 nanoseconds) and the y axis reports the affinity score of the complex per time step. The affinity score ranges from 0 to 1 and allow us to evaluate the stability of the complex. Given the contact data library, it is possible to estimate an affinity score threshold such that, if the trend of the time series drops below the threshold, the AAC is classified as *unstable* and the antibody is expected to release from the antigen within 101 nanoseconds. The exact procedure to estimate this threshold is explained in section 2.3.
+To evaluate if the global trend of a profile is either above or below the threshold, we can simply use its median value. In the figure above, the median affinity of the stable contact (blue) is above the threshold (dotted black line at 0.88), while it is below the threshold for the unstable one (red).
 
 
 ## 2.2. The LSTM module
