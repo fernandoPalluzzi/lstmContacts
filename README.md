@@ -190,3 +190,6 @@ $variant
 $hotspot
 [1] "None"
 ```
+
+The search output list includes: a copy of the input contact (`input`), the candidate antibody (`antibody`), which of the residues of the chosen antibodies best match the input (`ab.residues`), the results of the exact match for the input antigen (`exact.match`; "None" if no exact match is found), the results of the similarity match (`similarity.match`; disabled if an exact match was found), the residues of the internal library matching those of the antigen variant (`class.residues`), the majority class (`class`), the warning level of the search result (`warning.level`; from 0 to 15), quality of the search (`contact.level`; 3: exact, 2: good similarity search, 1: suboptimal similarity search), the proposed variant (`variant`), possible mutant residues (`hotspot`).
+
