@@ -218,7 +218,7 @@ As we see, the summary raises some warning messages:
 ### Majority class: 3
 ###  Warning level: 11/15 [suboptimal]
 ###  Contact match: similarity
-Messaggi di avvertimento:
+Warning messages:
 1: In ab.search(x[1], ab.library) : Partial antibody match.
 2: In res.search(res, x.ag) : Modeling possible suboptimal contacts.
 ```
