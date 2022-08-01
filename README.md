@@ -119,7 +119,7 @@ Secondly, to find the antigen variants that best fit the input complex, raw resu
 21 omicron Y505   H505  aromatic        basic
 ```
 
-## 1.3. Contact search and complex definition
+## 1.3. Contact search
 
 First, we need to open an R console and load the needed functions (lstmContacts requires only the basic R environment, version >= 4.0):
 
@@ -196,4 +196,76 @@ $hotspot
 ```
 
 The search output list includes: a copy of the input contact (`input`), the candidate antibody (`antibody`), which of the residues of the chosen antibodies best match the input (`ab.residues`), the results of the exact match for the input antigen and interacting antibody (`exact.match`; "None" if no exact match is found), the results of the similarity match (`similarity.match`; disabled if an exact match was found), the residues of the internal library matching those of the antigen variant (`class.residues`), the majority class (`class`), the warning level of the search result (`warning.level`; from 0 to 15), quality of the search (`contact.level`; 3: exact, 2: good similarity search, 1: suboptimal similarity search), the proposed variant (`variant`), possible mutant residues (`hotspot`).
+
+Let us make an example with a mock contact, to see how the similarity search output looks like:
+
+```r
+# Define a contact
+x <- c("h.D105", "Q449", "W455", "M492", "L493", "K494")
+
+# Search
+R <- preprocess(x)
+```
+
+As we see, the summary raises some warning messages:
+
+```
+### p
+0.628126310459145
+0.925496248203927
+2.423437389895
+0.628126310459145
+### Majority class: 3
+###  Warning level: 11/15 [suboptimal]
+###  Contact match: similarity
+Messaggi di avvertimento:
+1: In ab.search(x[1], ab.library) : Partial antibody match.
+2: In res.search(res, x.ag) : Modeling possible suboptimal contacts.
+```
+
+If we inspect the results, ...
+
+```
+> R
+$input
+[1] "h.D105" "Q449"   "W455"   "M492"   "L493"   "K494"  
+
+$antibody
+[1] "7cm4" "7l7e" "6zcz" "7r6w"
+
+$ab.residues
+    7cm4     7cm4     7cm4     7cm4     7l7e     7l7e     6zcz     6zcz 
+ "h.D54"  "h.D56"  "h.D57"  "h.D51"  "h.D56" "h.D107"  "h.D33"  "h.D99" 
+    7r6w 
+"h.E108" 
+
+$similarity.match
+  7cm4   7l7e   6zcz   7r6w 
+"Q493" "K444" "K386" "K356" 
+
+$class.residues
+[1] "K444" "Q493"
+
+$class
+[1] "class3"
+
+$warning.level
+[1] 11
+
+$contact.level
+[1] 2
+
+$variant
+[1] "omicron" "wt"     
+
+$hotspot
+[1] "W455" "M492" "L493"
+
+$exact.match
+[1] "None"
+```
+
+1.4. AAC search
+
+The user can search for an entire complex (AAC), specifying it as reported in section 1.2. Let us see a quick example:
 
