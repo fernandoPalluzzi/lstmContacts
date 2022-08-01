@@ -267,7 +267,7 @@ $hotspot
 
 The output shows how the current input yields only a similarity match within the internal library (this is expected for an unknown variant). Although acceptable, the search results raise a high warning level (11/15). Multiple antibodies (7cm4, 7l7e, 6zcz, 7r6w) could establish an effective contact with the input, although some hotspots were found: residues W455, M492, and L493 cannot be covered by any of the available antibodies. In addition, multipe variants match the input contact (omicron and wt). Although multiple variant match is generally ininfluent for the time series prediction (and somehow expected for an unknown variant), it might lead to a reduced specificity.
 
-## 1.4. AAC search
+## 1.4. Antigen-Antibody Complex search
 
 The user may search for an entire AAC, specifying it as reported in section 1.2. Eamples of known complexes are available within the `contact.map` object, for each of the available antibodies. In case of an AAC search, we will use the `contacts()` function, thet iteratively applies the `preprocess()` function. Let us see a quick example:
 
