@@ -310,7 +310,7 @@ $contact.level
 
 This complex can be established by three different antibodies (7kmg, 7cm4, 7l7d) with four variants (beta, omicron, delta, wt). The antibody residues taking part to the AAC are listed by the `ab.residues` attribute. The majority class is always the second and the contact level is always 3 (i.e., exact match), meaning that this is a high quality search result. In addition, the warning level vary from 0 to 6 (i.e., always < 8), confirming that all the contacts were found within the internal library.
 
-## 1.5. Extracting and drawing an affinity profile (non-LSTM solution)
+## 1.5. Extracting and drawing an affinity profile (non-LSTM manual procedure)
 
 Affinity time series (here called "profiles") can be extracted and drawn from both single contacts and entire AACs, based on the search results. In both cases, the extraction can be done with the `extractProfiles()` function. In case of a single contact, with an exact match, the extracted profile can be often a single vector (i.e., a single antigen-antibody contact matches the search). In the example below we will see an example of a stable (x0) and an unstable (x1) contact.
 
