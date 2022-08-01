@@ -322,7 +322,7 @@ Once the contact/AAC search has been done, the affinity time series (here called
 
 ## 2.1. Manual extraction using the search module
 
-Profiles can be extracted and drawn from both single contacts and entire AACs, based on the search results. In both cases, the extraction can be done with the `extractProfiles()` function. In case of a single contact, with an exact match, the extracted profile can be often a single vector (i.e., a single antigen-antibody contact matches the search). In the example below we will see an example of a stable (x0) and an unstable (x1) contact.
+Profiles can be extracted and drawn from both single contacts and entire AACs, based on the search results. In both cases, the extraction can be done with the `extractProfiles()` function. In case of a single contact, with an exact match, the extracted profile can be often a single vector (i.e., a single antigen-antibody contact matches the search). As a first example, we will see what a stable (x0) and an unstable (x1) contact look like.
 
 ```r
 # Define the input contact
@@ -362,6 +362,9 @@ dev.off()
 ```
 
 ![alt text](https://github.com/fernandoPalluzzi/lstmContacts/blob/main/figures/lstmContacts_manual_contact_drawing.png)
+
+The x axis is the time dimension (101 nanoseconds) and the y axis reports the affinity score of the complex per time step. The affinity score ranges from 0 to 1 and allow us to evaluate the stability of the complex. Given the contact data library, it is possible to estimate an affinity score threshold such that, if the trend of the time series drops below the threshold, the AAC is classified as *unstable* and the antibody is expected to release from the antigen within 101 nanoseconds. The exact procedure to estimate this threshold is explained in section 2.3.
+
 
 ## 2.2. The LSTM module
 
