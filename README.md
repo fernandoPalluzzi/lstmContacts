@@ -140,7 +140,6 @@ R <- preprocess(x)
 The `preprocess` function prints out a summary composed by four messages:
 
 ```
-R <- preprocess(x)
 ### p
 1.09261696547824
 4.36452855190691
