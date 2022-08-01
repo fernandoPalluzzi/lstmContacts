@@ -223,7 +223,7 @@ Messaggi di avvertimento:
 2: In res.search(res, x.ag) : Modeling possible suboptimal contacts.
 ```
 
-If we inspect the results, ...
+The results are the following:
 
 ```
 > R
