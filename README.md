@@ -265,7 +265,11 @@ $exact.match
 [1] "None"
 ```
 
-1.4. AAC search
+The output shows how the current input matches only by similarity, with a high warning level (11/15). Multiple antibodies (7cm4, 7l7e, 6zcz, 7r6w) could establish an effective contact with the input, although some hotspots have been found: residues W455, M492, L493 cannot be covered by any of the available antibodies. In addition, multipe variants match the input contact (omicron and wt). Although this is generally ininfluent for the time series prediction, it could be a sign of a reduced specificity.
 
-The user can search for an entire complex (AAC), specifying it as reported in section 1.2. Let us see a quick example:
+## 1.4. AAC search
+
+The user may search for an entire complex (AAC), specifying it as reported in section 1.2. Let us see a quick example:
+
+
 
