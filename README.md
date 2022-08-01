@@ -269,7 +269,7 @@ The output shows how the current input yields only a similarity match within the
 
 ## 1.4. Antigen-Antibody Complex search
 
-The user may search for an entire AAC, specifying it as reported in section 1.2. Eamples of known complexes are available within the `contact.map` object, for each of the available antibodies. In case of an AAC search, we will use the `contacts()` function, thet iteratively applies the `preprocess()` function. Let us see a quick example:
+The user may search for an entire AAC, specifying it as reported in section 1.1. Eamples of known complexes are available within the `contact.map` object, for each of the available antibodies. In case of an AAC search, we will use the `contacts()` function, thet iteratively applies the `preprocess()` function. Let us see a quick example:
 
 ```r
 # Define the input AAC
