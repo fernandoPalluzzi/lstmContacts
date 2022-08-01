@@ -368,6 +368,26 @@ The `extractProfile()` function takes a contact library as input (either the int
 The x axis is the time dimension (101 nanoseconds) and the y axis reports the affinity score of the complex per time step. The affinity score ranges from 0 to 1 and allow us to evaluate the stability of the complex. Given the contact data library, it is possible to estimate an affinity score threshold such that, if the trend of the time series drops below the threshold, the AAC is classified as *unstable* and the antibody is expected to release from the antigen within 101 nanoseconds. The exact procedure to estimate this threshold is explained in section 2.3.
 To evaluate if the global trend of a profile is either above or below the threshold, we can simply use its median value. In the figure above, the median affinity of the stable contact (blue) is above the threshold (dotted black line at 0.88), while the unstable one (red) is below the threshold.
 
+Modeling an AAC can be done similarly. Let us model the Bamlanivimab-*beta* complex:
+
+```r
+# Bamlanivimab (7kmg) - beta variant complex
+x <- list(x1 = c("h.R50", "V483", "E484"),
+          x2 = c("h.L55", "L452", "T470", "F490"),
+          x3 = c("h.Y101", "E484", "F490"),
+          x4 = c("h.R104", "Q493", "S494"),
+          x5 = c("l.Y32", "F486", "Y489"),
+          x6 = c("l.Y92", "F486", "Y489"),
+          x7 = c("l.R96", "V483", "E484"))
+
+R <- contacts(x)
+
+profile <- extractProfiles(data = contact.data,
+                           antibody = R$antibody,
+                           variants = R$variant,
+                           residues = R$ab.residues,
+                           stochastic = TRUE)
+```
 
 ## 2.2. The LSTM module
 
