@@ -451,3 +451,7 @@ dev.off()
 ## 2.2. The LSTM module
 
 Manual prediction through the R module has two disadvantages: (i) it is not based on a true learning process, but rather on the median of the contacts retrieved from the library, and (ii) the predicted value at a given time point is not based on the previous values of the time series. This makes manual predictions not general enough and strongly dependent on the composition of the current contact library.
+
+## 2.3. Affinity score threshold
+
+...
