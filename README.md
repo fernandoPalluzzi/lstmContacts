@@ -446,7 +446,7 @@ dev.off()
 
 ![alt text](https://github.com/fernandoPalluzzi/lstmContacts/blob/main/figures/lstmContacts_manual_contact_beta.png)
 
-<!--- Manual prediction for unknown variants --->
+<!--- Manual modeling of unknown variants --->
 
 ## 2.2. The LSTM module
 
