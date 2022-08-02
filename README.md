@@ -361,7 +361,7 @@ abline(h = 0.88, lwd = 5, lty = 3)
 dev.off()
 ```
 
-The `extractProfile()` function takes a contact library as input (either the internal library or any othe dataset with the same format), and the list of antibody, variants and residues from the search step. A molecular dynamics simulation is affected by local force field modifications driving the time series to different destinies at each run. Generally, the higher the instability of a contact, the higher the variability among its replicates. The `extractProfile()` function defines the profile such that the affinity value a(t) at nanosecond t is the mean m(t) of the affinity values among replicates plus a random value s(t) between -SD(t) and SD(t), were SD = standard deviation. If the argument `stochastic` is FALSE, s(t) is fixed to 0.
+The `extractProfile()` function takes a contact library as input (either the internal library or any othe dataset with the same format), and the list of antibody, variants and residues from the search step. A molecular dynamics simulation is affected by local force field modifications driving the time series to different destinies at each run. Generally, the higher the instability of a contact, the higher the variability among its replicates. The `extractProfile()` function defines the profile such that the affinity value a(t), at nanosecond t, is the mean m(t) of the affinity values among replicates plus a random value s(t) between -SD(t) and SD(t), were SD = standard deviation. If the argument `stochastic` is FALSE, s(t) is fixed to 0.
 
 ![alt text](https://github.com/fernandoPalluzzi/lstmContacts/blob/main/figures/lstmContacts_manual_contact_drawing.png)
 
