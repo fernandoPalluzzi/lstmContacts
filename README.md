@@ -432,7 +432,7 @@ lines(md.7kmg.beta, type = "l", lwd = 4, col = "darkred", lty = 2)
 lines(profile$ab.7cm4.beta, type = "l", lwd = 4, col = "darkorange")
 lines(profile$ab.7l7d.beta, type = "l", lwd = 4, col = "darkblue")
 abline(h = 0.88, lwd = 5, lty = 3)
-legend("bottomleft", fill = c("darkblue", "darkorange", "darkred", "darkred", "black"),
+legend("bottomleft", fill = c("darkblue", "darkorange", "red3", "darkred", "black"),
                      bg = "white",
 legend = c("7l7d-beta predicted",
            "7cm4-beta predicted",
