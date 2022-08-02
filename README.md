@@ -348,7 +348,7 @@ profile1 <- extractProfiles(data = contact.data,
                             stochastic = TRUE)
 
 # Drawing the output profile
-png("~/lstmContacts_naive_contact_prediction.png", width = 20, height = 10,
+png("~/lstmContacts_manual_contact_drawing.png", width = 20, height = 10,
     units = 'in', res = 400)
 plot(profile0, type = "l", lwd = 4, col = "blue",
      ylim = c(0, 1),
@@ -388,6 +388,63 @@ profile <- extractProfiles(data = contact.data,
                            residues = R$ab.residues,
                            stochastic = TRUE)
 ```
+
+In this case, we have multimple results matching the input AAC from the library, including the one we are searching for (first column).
+
+```r
+> head(profile)
+  ab.7kmg.beta ab.7kmg.omicron ab.7kmg.delta ab.7kmg.wt ab.7cm4.beta
+1         1.00            1.00          1.00       1.00         1.00
+2         0.96            0.97          0.99       0.99         0.99
+3         0.85            0.98          0.99       1.00         0.99
+4         0.82            0.94          0.99       0.99         0.90
+5         0.85            0.92          0.99       0.98         0.78
+6         0.86            0.92          0.99       0.99         0.81
+  ab.7cm4.omicron ab.7cm4.delta ab.7cm4.wt ab.7l7d.beta ab.7l7d.omicron
+1            1.00          1.00       1.00         1.00            1.00
+2            0.95          1.00       0.99         0.98            0.98
+3            0.94          1.00       1.00         1.00            0.97
+4            0.99          0.99       1.00         0.99            0.97
+5            0.97          0.98       0.99         1.00            0.98
+6            0.99          0.99       0.97         1.00            0.98
+  ab.7l7d.delta ab.7l7d.wt
+1          1.00       1.00
+2          0.99       0.96
+3          1.01       0.97
+4          0.91       0.98
+5          0.92       0.99
+6          0.97       0.92
+```
+
+We can compare how the beta variant is expected to interact with 7kmg (Bamlanivimab, red) and the other suggested antibodies: 7cm4 (Regdanvimab, orange) and 7l7d (Tixagevimab, blue). The dashed red line reports the actual molecular dynamics for the 7kmg-beta complex (stored in the preset variable md.7kmg.beta). As shown in the figure below, the only stable complex is established by Tixagevimab.
+
+```r
+png("~/lstmContacts_manual_contact_beta.png", width = 20, height = 10,
+    units = 'in', res = 400)
+plot(profile$ab.7kmg.beta, type = "l",
+     lwd = 4, col = "red3",
+     ylim = c(0.2, 1),
+     xlab = "nanoseconds",
+     ylab = "Affinity score",
+     cex.axis = 1.8,
+     cex.lab = 1.4)
+lines(md.7kmg.beta, type = "l", lwd = 4, col = "darkred", lty = 2)
+lines(profile$ab.7cm4.beta, type = "l", lwd = 4, col = "darkorange")
+lines(profile$ab.7l7d.beta, type = "l", lwd = 4, col = "darkblue")
+abline(h = 0.88, lwd = 5, lty = 3)
+legend("bottomleft", fill = c("darkblue", "darkorange", "darkred", "darkred", "black"),
+                     bg = "white",
+legend = c("7l7d-beta predicted",
+           "7cm4-beta predicted",
+           "7kmg-beta predicted",
+           "7kmg-beta true molecular dynamics",
+           "Affinity score threshold (0.88)"),
+lty = c(1, 1, 1, 2, 3),
+cex = 1.6)
+dev.off()
+```
+
+
 
 ## 2.2. The LSTM module
 
