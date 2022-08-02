@@ -9,7 +9,7 @@ The **lstmContacts** software characterizes and draws atigen-antibody interactio
 
 # 1. Antigen-Antibody Complex search module
 
-This module can be used by starting an R environment. The lstmContacts only requires the base R package (version >= 4.0). We can load R module functions and data using `source`:
+This module can be used by starting an R environment. The lstmContacts only requires the base R package (>= 4.0). We can load R module functions and data using `source`:
 
 ```r
 source("~/lstmContacts/contacts.R")
