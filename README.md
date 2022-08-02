@@ -444,6 +444,7 @@ cex = 1.6)
 dev.off()
 ```
 
+![alt text](https://github.com/fernandoPalluzzi/lstmContacts/blob/main/figures/lstmContacts_manual_contact_beta.png)
 
 
 ## 2.2. The LSTM module
