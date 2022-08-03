@@ -524,7 +524,24 @@ The lstmContacts software already comes with two learning sets derived from the 
 
 Manual prediction through the R module has two disadvantages: (i) it is not based on a true learning process, but rather on the median of the contacts retrieved from the library, and (ii) the predicted value at a given time point is not based on the previous values of the time series. This makes manual predictions not general enough and strongly dependent on the composition of the current contact library.
 
+This module can be run on-the-fly through a python console. Firstly, from a bash terminal, we need to activate the TensorFlow-GPU environment:
+
+```
+conda activate tfgpu_env
+python
+```
+
+Once inside the python console, we should load the LSTM module:
+
+```
+from lstmContacts import *
+```
+
+The first step is the definition of the training set. ...
+
 ...
+
+&nbsp;
 
 # 3. Additional information
 
@@ -541,7 +558,7 @@ optimal.cutpoints(X = "affinity", status = "y",
                   data = ascore)
 ```
 
-The `ascore` object is a data.frame reporting the affinity values (attribute *affinity*) of each available molecular dynamics simulation. The attribute *y* is a binary vector equal to 0 if a given affinity value comes from a stable molecular dynamics simulation, and 1 if the value comes from an unstable simulation. The stability values are derived from the affinity time series cluster analysis (clusters 1 and 3 are stable, while clusters 2 and 4 are unstable). The criterion used to define the optimal cutpoint is the affinity value at which the equality between sensitivity and specificity is reached. This package allows also to compute point area under the ROC curve (AUC) values and related 95% confidence intervals.
+The `ascore` object is a data.frame reporting the affinity values (attribute *affinity*) of each available molecular dynamics simulation. The attribute *y* is a binary vector equal to 0 if a given affinity value comes from a stable molecular dynamics simulation, and 1 if the value comes from an unstable simulation. The stability values are derived from the affinity time series cluster analysis (clusters 1 and 3 are stable, while clusters 2 and 4 are unstable). The criterion used to define the optimal cutpoint is the affinity value at which the equality between sensitivity and specificity is reached. This package allows also to compute point area under the ROC curve (AUC) values and related 95% confidence intervals:
 
 ```
 Call:
