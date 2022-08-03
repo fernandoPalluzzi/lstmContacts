@@ -100,7 +100,8 @@ class4 class4 class4 class4 class4 class4 class4 class4 class4 class4
 "P412" "Q414" "D427" "D428" "F429" "T430" "N437" "V503" "G504" "Y508" 
 ```
 
-Each residue is assigned (also by similarity) to one or more classes. Then the odds ratio p = odds(i-th class)/odds(not i-th class) is calculated. The contact is assigned to the class with the highest p, referred to as the "majority class". When all the contacts of a complex belong to the same class, we have a confirmation to the goodness of the search results. 
+Each residue is assigned (also by similarity) to one or more classes. Then the odds ratio p = odds(i-th class)/odds(not i-th class) is calculated. The contact is assigned to the class with the highest p, referred to as the "majority class". When all the contacts of a complex belong to the same class, we have a confirmation to the goodness of the search results.
+
 Secondly, to find the antigen variants that best fit the input complex, raw results are further refined by checking for possible mutation hotspots. The default object `contact.mutations` contains mutational information for the Spike variants *alpha*, *beta*, *delta*, and *omicron*, with respect to the *wt* protein. The presence of one or more residues from either the *wt* or the mutant Spike variant may reveal similarities with the input contact(s).
 
 ```
