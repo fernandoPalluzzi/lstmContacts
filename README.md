@@ -47,7 +47,7 @@ from keras.models import Model
 from keras.utils import to_categorical
 ```
 
-To install lstmContacts, it is sufficient cloning or copying its repository within a given directory (e.g., the home directory) and add its full path to the PYTHONPATH environment variable. This can be done permanently by modifying the .bashrc file, by adding the following line:
+To install **lstmContacts**, it is sufficient cloning or copying its repository within a given directory (e.g., the home directory) and add its full path to the PYTHONPATH environment variable. This can be done permanently by modifying the .bashrc file, by adding the following line:
 
 ```
 export PYTHONPATH=$PYTHONPATH:~/lstmContacts
