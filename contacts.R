@@ -1,11 +1,17 @@
 # R 
 
-load("/home/fernando/contactsCore/RData/Contacts_AminoAcids.RData")
-load("/home/fernando/contactsCore/RData/Contacts_AminoAcid_groups.RData")
-load("/home/fernando/contactsCore/RData/Contacts_map.RData")
-load("/home/fernando/contactsCore/RData/Contacts.RData")
-load("/home/fernando/contactsCore/RData/Contacts_abClass.RData")
-load("/home/fernando/contactsCore/RData/Contacts_mutations.RData")
+load("~/lstmContacts/RData/Contacts_AminoAcids.RData")
+load("~/lstmContacts/RData/Contacts_AminoAcid_groups.RData")
+load("~/lstmContacts/RData/Contacts_map.RData")
+load("~/lstmContacts/RData/Contacts.RData")
+load("~/lstmContacts/RData/Contacts_abClass.RData")
+load("~/lstmContacts/RData/Contacts_mutations.RData")
+load("~/lstmContacts/RData/affinity_groups.RData")
+load("~/lstmContacts/RData/affinity_cutoffs.RData")
+load("~/lstmContacts/RData/molDynamics/md_7kmg_beta.RData")
+load("~/lstmContacts/RData/molDynamics/md_7l7d_wt.RData")
+load("~/lstmContacts/RData/molDynamics/md_7l7d_beta.RData")
+load("~/lstmContacts/RData/molDynamics/md_7l7d_delta.RData")
 
 aa.info <- function(x, ab = TRUE) {
 	aa <- vector()
