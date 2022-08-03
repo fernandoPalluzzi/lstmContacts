@@ -518,7 +518,7 @@ data <- prepareLibrary(data = contact.data, chunk = 5)
 ```
 
 The chunk argument defines the size of the time interval in nanoseconds. The object data is a data.frame with the following attributes: source sequences (`data$a`), target sequences (`data$y`), residue (`data$res`), antibody (`data$antibody`), variant (`data$variant`). These attributes can be used to filter subsets of the training data.
-The lstmContacts software already comes with two learning sets derived from the internal contact library, with interval size 5 and 10 nanoseconds (*contactLibrary_t5.txt* and *contactLibrary_t10.txt*, respectively). If one of these datasets are used, the library preparation step is not required.
+The lstmContacts software already comes with two learning sets derived from the internal contact library, with interval size 5 and 10 nanoseconds (**contactLibrary_t5.txt** and **contactLibrary_t10.txt**, respectively). If one of these datasets are used, the library preparation step is not required.
 
 ## 2.3. The LSTM module
 
@@ -530,4 +530,27 @@ Manual prediction through the R module has two disadvantages: (i) it is not base
 
 ## 3.1. Affinity score threshold calculation
 
-...
+The global affinity score threshold is calculated using the R package OptimalCutpoints (version 1.1-5), as follows:
+
+```r
+library(OptimalCutpoints)
+
+optimal.cutpoints(X = "affinity", status = "y",
+                  tag.healthy = 1,
+                  methods = "SpEqualSe",
+                  data = ascore)
+```
+
+The `ascore` object is a data.frame reporting the affinity values (attribute affinity) of each available molecular dynamics simulation. The attribute y is a binary vector equal to 0 if a given affinity value comes from a stable molecular dynamics simulation, and 1 if the value comes from an unstable simulation. The stability values are derived from the affinity time series cluster analysis (clusters 1 and 3 are stable, while clusters 2 and 4 are unstable). The criterion used to define the optimal cutpoint is the affinity value at which the equality between sensitivity and specificity is reached. This package allows also to compute point area under the ROC curve (AUC) values and related 95% confidence intervals.
+
+```
+Call:
+optimal.cutpoints.default(X = "affinity", status = "y", tag.healthy = 1, 
+    methods = "SpEqualSe", data = ascore)
+
+Optimal cutoffs:
+  SpEqualSe
+1    0.8824
+
+Area under the ROC curve (AUC):  0.941 (0.904, 0.979)
+```
