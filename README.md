@@ -417,7 +417,7 @@ In this case, we have multimple results matching the input AAC from the library,
 6          0.97       0.92
 ```
 
-We can compare how the beta variant is expected to interact with 7kmg (Bamlanivimab, red) and the other suggested antibodies: 7cm4 (Regdanvimab, orange) and 7l7d (Tixagevimab, blue). The dashed red line reports the actual molecular dynamics for the 7kmg-beta complex (stored in the preset variable md.7kmg.beta). As shown in the figure below, the only stable complex is established by Tixagevimab.
+We can compare how the beta variant is expected to interact with 7kmg (Bamlanivimab, red) and the other suggested antibodies: 7cm4 (Regdanvimab, orange) and 7l7d (Tixagevimab, blue). The dashed red line reports the actual molecular dynamics for the 7kmg-beta complex (stored in the preset variable md.7kmg.beta). As shown in the figure below, the only stable complex is established by Tixagevimab (7l7d).
 
 ```r
 png("~/lstmContacts_manual_contact_beta.png", width = 20, height = 10,
