@@ -518,7 +518,7 @@ data <- prepareLibrary(data = contact.data, chunk = 5)
 ```
 
 The chunk argument defines the size of the time interval in nanoseconds. The object data is a data.frame with the following attributes: source sequences (`data$a`), target sequences (`data$y`), residue (`data$res`), antibody (`data$antibody`), variant (`data$variant`). These attributes can be used to filter subsets of the training data.
-The lstmContacts library already comes with two learning sets derived from the internal contact library, with interval size 5 and 10 nanoseconds. If one of these datasets are used, the library preparation step is not required.
+The lstmContacts software already comes with two learning sets derived from the internal contact library, with interval size 5 and 10 nanoseconds (*contactLibrary_t5.txt* and *contactLibrary_t10.txt*, respectively). If one of these datasets are used, the library preparation step is not required.
 
 ## 2.3. The LSTM module
 
