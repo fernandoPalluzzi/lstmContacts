@@ -55,7 +55,7 @@ To install **lstmContacts**, it is sufficient cloning or copying its repository 
 export PYTHONPATH=$PYTHONPATH:~/lstmContacts
 ```
 
-Please, be sure to have execution rights for the ~/lstmContacts/lstmContacts.py file. If not you might change it with:
+Please, be sure to have execution rights for the ~/lstmContacts/lstmContacts.py file. If not, you may change it with:
 
 ```
 chmod 700 ~/lstmContacts/lstmContacts.py
