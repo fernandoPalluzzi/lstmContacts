@@ -422,7 +422,7 @@ The `extractProfile()` function takes a contact library as input (either the int
 
 ![alt text](https://github.com/fernandoPalluzzi/lstmContacts/blob/main/figures/lstmContacts_manual_contact_drawing.png)
 
-The x axis is the time dimension (101 nanoseconds) and the y axis reports the affinity score of the complex per time step. The affinity score ranges from 0 to 1 and allow us to evaluate the stability of the complex. Given the contact data library, it is possible to estimate an affinity score threshold such that, if the trend of the time series drops below the threshold, the AAC is classified as *unstable* and the antibody is expected to release from the antigen within 101 nanoseconds. The exact procedure to estimate this threshold is explained in section 2.3.
+The x axis is the time dimension (101 nanoseconds) and the y axis reports the affinity score of the complex per time step. The affinity score ranges from 0 to 1 and allow us to evaluate the stability of the complex. Given the contact data library, it is possible to estimate an affinity score threshold such that, if the trend of the time series drops below the threshold, the AAC is classified as *unstable* and the antibody is expected to release from the antigen within 101 nanoseconds. The exact procedure to estimate this threshold is explained in section 3.1.
 To evaluate if the global trend of a profile is either above or below the threshold, we can simply use its median value. In the figure above, the median affinity of the stable contact (blue) is above the threshold (dotted black line at 0.88), while the unstable one (red) is below the threshold.
 
 Modeling an AAC can be done similarly to what we did for a single contact. Let us model the Bamlanivimab-*beta* complex:
@@ -503,14 +503,31 @@ dev.off()
 
 ![alt text](https://github.com/fernandoPalluzzi/lstmContacts/blob/main/figures/lstmContacts_manual_contact_beta.png)
 
-<!--- Manual modeling of unknown variants --->
+<!--- Manual modeling of unknown variants: the combine() function --->
 
-## 2.2. The LSTM module
+<!--- Add a page with function help for both R and Python modules --->
+
+## 2.2. Data preparation for the LSTM module
+
+Before launching the LSTM module, an optional step involves the preparation of the training data. This module uses an encoder-decoder strategy, in which the time series is divided into intervals of equal size (by default, 5 nanoseconds). Each interval is used to predict the next one, up to the end of the time series. If the time series length is not a multiple of the interval size, the remaining time points are removed from the end of the series.
+The training set consists in entries composed by a source interval (i.e., the input sequence) and a target interval (i.e., the sequence that should be predicted from the source one). Here, both the target and the source sequences are vectors of affinity scores (one value for each time point).
+The training data can be prepared from the internal contact library by using the `prepareLibrary()` function:
+
+```r
+data <- prepareLibrary(data = contact.data, chunk = 5)
+```
+
+The chunk argument defines the size of the time interval in nanoseconds. The object data is a data.frame with the following attributes: source sequences (`data$a`), target sequences (`data$y`), residue (`data$res`), antibody (`data$antibody`), variant (`data$variant`). These attributes can be used to filter subsets of the training data.
+The lstmContacts library already comes with two learning sets derived from the internal contact library, with interval size 5 and 10 nanoseconds. If one of these datasets are used, the library preparation step is not required.
+
+## 2.3. The LSTM module
 
 Manual prediction through the R module has two disadvantages: (i) it is not based on a true learning process, but rather on the median of the contacts retrieved from the library, and (ii) the predicted value at a given time point is not based on the previous values of the time series. This makes manual predictions not general enough and strongly dependent on the composition of the current contact library.
 
 ...
 
-## 2.3. Affinity score threshold calculation
+# 3. Additional information
+
+## 3.1. Affinity score threshold calculation
 
 ...
