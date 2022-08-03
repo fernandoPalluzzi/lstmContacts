@@ -446,7 +446,7 @@ truncSplit <- function(x) {
 	return(x)
 }
 
-prepareLibrary <- function(data = contact.data, chunk = 10,
+prepareLibrary <- function(data = contact.data, chunk = 5,
                            residues = NULL, stochastic = FALSE,
                            f.rep = "mean", f.res = "median", a0 = 0) {
 	
