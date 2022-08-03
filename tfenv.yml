@@ -1,8 +1,8 @@
 ## filename: tfenv.yml
 
-## Environment File Definition
+## TensorFlow-GPU environment
 
-name: tfgpu_env # tensorflow-gpu environment
+name: tfgpu_env
 channels:
   - conda-forge
   - anaconda
