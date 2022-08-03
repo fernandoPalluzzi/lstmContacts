@@ -7,7 +7,7 @@ The **lstmContacts** software is designed for **Unix-based systems**.
 
 The search module only requires the base R environment (>= 4.0), that can be installed following the instructions at https://www.r-project.org. The lstmContacts library already comes with contact data library and supplementary annotations required by the R module.
 
-The LSTM-based library requires the installation of Python (>= 3.8) and the tensorflow-gpu library (>= 2.4), together with core computational Python libraries, including numpy, pandas, tabulate, scipy, and matplotlib. To facilitate the correct execution of the software, the installation of Conda is recommended (https://docs.conda.io/projects/conda/en/latest/user-guide/install). The lstmContacts repository provides a **tfenv.yml** file that can be used to install all the required dependencies. Please, follow these instruction from a bash terminal:
+The LSTM-based library requires the installation of Python (>= 3.8) and the tensorflow-gpu library (>= 2.4), together with core computational Python libraries, including numpy, pandas, tabulate, scipy, and matplotlib. To facilitate the correct execution of the software, the installation of Conda is recommended (https://docs.conda.io/projects/conda/en/latest/user-guide/install). The lstmContacts repository provides a **tfenv.yml** file that can be used to install all the required dependencies. Please, follow these instructions from a bash terminal:
 
 ```
 # After installing Conda, activate the base Conda environment
