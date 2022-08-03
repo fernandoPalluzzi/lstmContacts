@@ -1,7 +1,7 @@
 # lstmContacts
 The **lstmContacts** software characterizes and draws atigen-antibody interaction profiles based on a library of known contacts. The software has two main modules: the contact similarity search module (R module) and the prediction module, based on long short-term memory (LSTM) recurrent neural networks (Python module). The R module takes the input antigen-antibody complex and generates an affinity contact library that can be used by the LSTM module for the refinement/prediction of an interaction time series.
 
-## Requirements and installation
+## Requirements
 
 The **lstmContacts** software is designed for **Unix-based systems**.
 
@@ -46,6 +46,8 @@ from keras.layers import Dense
 from keras.models import Model
 from keras.utils import to_categorical
 ```
+
+## Installation
 
 To install **lstmContacts**, it is sufficient cloning or copying its repository within a given directory (e.g., the home directory) and add its full path to the PYTHONPATH environment variable. This can be done permanently by modifying the .bashrc file, by adding the following line:
 
