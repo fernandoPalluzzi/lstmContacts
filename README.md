@@ -582,6 +582,31 @@ profile = lstmProfile(pset, encoder, decoder, t0 = 5, t1 = 5, n = 101, method = 
 
 This function takes the prediction set (or validation set), the encoder and decoder models generated during the training phase, the source and target interval sizes (t0 and t1, respectively), the total number of features in the time series (n), a method to combine the affinity prediction of each contact into a single AAC time series (default = "median"). The `profile` variable will be a vector corresponding to the predicted time series. The figure below shows the comparison between the LSTM predictions (solid lines) against the search module ones (dotted lines), for the Bamlanivimab-*beta* (red) and the Tixagevimab-*beta* (blue) complexes.
 
+```r
+png("~/lstmContacts_LSTM_predictions_vs_manual.png", width = 20, height = 10,
+    units = 'in', res = 400)
+plot(pmd.7l7d.beta/100, type = "l", lwd = 4, col = "blue",
+     ylim = c(0.2, 1),
+     xlab = "nanoseconds",
+     ylab = "Affinity score",
+     cex.axis = 1.8,
+     cex.lab = 1.4)
+lines(pmd.7kmg.beta/100, type = "l", lwd = 4, col = "red3")
+lines(profile$ab.7l7d.beta, type = "l", lwd = 2.5, col = "darkblue", lty = 3)
+lines(profile$ab.7kmg.beta, type = "l", lwd = 2.5, col = "darkred", lty = 3)
+abline(h = 0.88, lwd = 5, lty = 3)
+legend("bottomleft", fill = c("blue", "blue", "red3", "red3", "black"),
+                     bg = "white",
+legend = c("7l7d-beta LSTM-predicted",
+           "7l7d-beta search module",
+           "7kmg-beta LSTM-predicted",
+           "7kmg-beta search module",
+           "Affinity score threshold (0.88)"),
+lty = c(1, 3, 1, 3, 3),
+cex = 1.6)
+dev.off()
+```
+
 ![alt text](https://github.com/fernandoPalluzzi/lstmContacts/blob/main/figures/lstmContacts_LSTM_predictions_vs_manual_beta.png)
 
 &nbsp;
