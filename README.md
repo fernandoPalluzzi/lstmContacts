@@ -568,7 +568,7 @@ model, encoder, decoder = lstmTraining(tset, n = 101, units = 128, epochs = 100)
 
 To do so we feed the `lstmTrining()` function with the training set, the number of total features to model, the number of units (i.e., cells) we want to be included in the encoder and decoder models (default = 128), and the numer of epochs (i.e., the number of forward-backward propagation cycles that are used to learn model parameters). By default, the number of epochs is set to 100, although the user may tune it depending on the training set size and the available computational resources. Section 3.2 shows how to arrange the training step for validation purposes.
 
-Now that we trained the model, we should define a set of target sequences to be predicted, given a set of source ones (i.e., a prediction set). Following the example in section 2.1, we could try to draw the Bamlanivimab-*beta* complex, and compare these results with those from the search module. Thus, we define the prediction set as follows:
+Now that we trained the model, we should define a set of target sequences to be predicted, given a set of source ones (i.e., a prediction set). Following the example in section 2.1, we could try to draw the Bamlanivimab-*beta* complex time series, and compare these results with those from the search module. Thus, we define the prediction set as follows:
 
 ```python
 pset = contactLibrary(filename = "~/contactsCore/contactLibrary_t5.txt",
@@ -576,7 +576,13 @@ pset = contactLibrary(filename = "~/contactsCore/contactLibrary_t5.txt",
                       antibody = "7kmg")
 ```
 
-...
+The profile can be then generated using `lstmProfile()`:
+
+```python
+profile = lstmProfile(pset, encoder, decoder, t0 = 5, t1 = 5, n = 101, method = "median")
+```
+
+This function takes the prediction set (or validation set), the encoder and decoder models generated during the training phase, the source and target interval sizes (t0 and t1, respectively), the total number of features in the time series (n), a method to combine the affinity prediction of each contact into a single AAC time series (default = "median"). The `profile` variable will be a vector corresponding to the predicted time series.
 
 &nbsp;
 
