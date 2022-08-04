@@ -611,6 +611,8 @@ dev.off()
 
 ![alt text](https://github.com/fernandoPalluzzi/lstmContacts/blob/main/figures/lstmContacts_LSTM_predictions_vs_manual_beta.png)
 
+<!--- Unknown sequence prediction --->
+
 &nbsp;
 
 # 3. Additional information
