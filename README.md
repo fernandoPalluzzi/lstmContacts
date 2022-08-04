@@ -473,7 +473,7 @@ In this case, we have multimple results matching the input AAC from the library,
 6          0.97       0.92
 ```
 
-We can compare how the beta variant is expected to interact with 7kmg (Bamlanivimab, red) and the other suggested antibodies: 7cm4 (Regdanvimab, orange) and 7l7d (Tixagevimab, blue). The dashed red line reports the actual molecular dynamics for the 7kmg-beta complex (stored in the preset variable md.7kmg.beta). As shown in the figure below, the only stable complex is established by Tixagevimab (7l7d).
+We can compare how the beta variant is expected to interact with 7kmg (Bamlanivimab, red) and the other suggested antibodies: 7cm4 (Regdanvimab, orange) and 7l7d (Tixagevimab, blue). As shown in the figure below, the only stable complex is established by Tixagevimab (7l7d).
 
 ```r
 png("~/lstmContacts_manual_contact_beta.png", width = 20, height = 10,
@@ -485,23 +485,23 @@ plot(profile$ab.7kmg.beta, type = "l",
      ylab = "Affinity score",
      cex.axis = 1.8,
      cex.lab = 1.4)
-lines(md.7kmg.beta, type = "l", lwd = 4, col = "darkred", lty = 2)
 lines(profile$ab.7cm4.beta, type = "l", lwd = 4, col = "darkorange")
 lines(profile$ab.7l7d.beta, type = "l", lwd = 4, col = "darkblue")
 abline(h = 0.88, lwd = 5, lty = 3)
-legend("bottomleft", fill = c("darkblue", "darkorange", "red3", "darkred", "black"),
+legend("bottomleft", fill = c("darkblue", "darkorange", "red3", "black"),
                      bg = "white",
-legend = c("7l7d-beta predicted",
-           "7cm4-beta predicted",
-           "7kmg-beta predicted",
-           "7kmg-beta true molecular dynamics",
+legend = c("7l7d-beta predicted profile",
+           "7cm4-beta predicted profile",
+           "7kmg-beta predicted profile",
            "Affinity score threshold (0.88)"),
-lty = c(1, 1, 1, 2, 3),
+lty = c(1, 1, 1, 3),
 cex = 1.6)
 dev.off()
 ```
 
-![alt text](https://github.com/fernandoPalluzzi/lstmContacts/blob/main/figures/lstmContacts_manual_contact_beta.png)
+...
+
+<!--- ![alt text](https://github.com/fernandoPalluzzi/lstmContacts/blob/main/figures/lstmContacts_manual_contact_beta.png) --->
 
 <!--- Manual modeling of unknown variants: the combine() function --->
 
