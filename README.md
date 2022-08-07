@@ -580,7 +580,7 @@ The profile can be then generated using `lstmProfile()`:
 pmd_7kmg_beta = lstmProfile(pset, encoder, decoder, t0 = 5, t1 = 5, n = 101, method = "median")
 ```
 
-This function takes the prediction set (or validation set), the encoder and decoder models generated during the training phase, the source and target interval sizes (t0 and t1, respectively), the total number of features in the time series (n), a method to combine the affinity prediction of each contact into a single AAC time series (default = "median"). The `lstm_profile` variable will be a vector corresponding to the predicted time series.
+This function takes the prediction set (or validation set), the encoder and decoder models generated during the training phase, the source and target interval sizes (t0 and t1, respectively), the total number of features in the time series (n), a method to combine the affinity prediction of each contact into a single AAC time series (default = "median"). The `pmd_7kmg_beta` variable will be a vector corresponding to the predicted time series.
 
 The figure below shows the comparison between the LSTM predictions (solid lines) against the search module ones (dotted lines), for the Tixagevimab-*beta* (blue) and the Bamlanivimab-*beta* (red) complexes. LSTM predictions are commonly done in percent values (0 to 100), therefore the two predicted time series (stored in the pmd.7l7d.beta and pmd.7kmg.beta variables, respectively) are divided by 100.
 
