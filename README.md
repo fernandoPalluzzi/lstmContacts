@@ -630,7 +630,7 @@ optimal.cutpoints(X = "affinity", status = "y",
                   data = ascore)
 ```
 
-The `ascore` object is a data.frame reporting the affinity values (attribute *affinity*) of each available molecular dynamics simulation. The attribute *y* is a binary vector equal to 0 if a given affinity value comes from a stable molecular dynamics simulation, and 1 if the value comes from an unstable simulation. The stability values are derived from the affinity time series cluster analysis (clusters 1 and 3 are stable, while clusters 2 and 4 are unstable). The criterion used to define the optimal cutpoint is the affinity value at which the equality between sensitivity and specificity is reached. This package allows also to compute point area under the ROC curve (AUC) values and related 95% confidence intervals.
+The `ascore` object is a data.frame reporting the affinity values (attribute *affinity*) of each available molecular dynamics simulation. The attribute *y* is a binary vector equal to 0 if a given affinity value comes from a stable molecular dynamics simulation, and 1 if the value comes from an unstable simulation. The stability values can be derived from unsupervised methods, such as affinity time series cluster analysis. The criterion used to define the optimal cutpoint is the affinity value at which the equality between sensitivity and specificity is reached. This method allows to compute the area under the ROC curve (AUC) value and related 95% confidence intervals.
 
 ## 3.2. Validation
 
