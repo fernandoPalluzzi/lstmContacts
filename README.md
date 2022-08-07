@@ -577,7 +577,7 @@ pset = contactLibrary(filename = "~/contactsCore/contactLibrary_t5.txt",
 The profile can be then generated using `lstmProfile()`:
 
 ```python
-lstm_profile = lstmProfile(pset, encoder, decoder, t0 = 5, t1 = 5, n = 101, method = "median")
+pmd_7kmg_beta = lstmProfile(pset, encoder, decoder, t0 = 5, t1 = 5, n = 101, method = "median")
 ```
 
 This function takes the prediction set (or validation set), the encoder and decoder models generated during the training phase, the source and target interval sizes (t0 and t1, respectively), the total number of features in the time series (n), a method to combine the affinity prediction of each contact into a single AAC time series (default = "median"). The `lstm_profile` variable will be a vector corresponding to the predicted time series.
