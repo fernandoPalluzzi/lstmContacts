@@ -515,7 +515,7 @@ The training data can be prepared from the internal contact library by using the
 data <- prepareLibrary(data = contact.data, chunk = 5)
 ```
 
-The chunk argument defines the size of the time interval in nanoseconds. The object data is a data.frame with the following attributes: source sequences (`data$a`), target sequences (`data$y`), involved antibody residue (`data$res`), antibody (`data$antibody`), variant (`data$variant`). These attributes can be used to filter subsets of the training data. If an affinity score threshold is given (argument `a0`), an optinonal `data$group` attribute will be added (this will be 0 for a stable contact and 1 for an unstable one). The LSTM input file can be then generated from this data.frame as a tab-separated file.
+The chunk argument defines the size of the time interval in nanoseconds. The object data is a data.frame with the following attributes: source sequences (`data$a`), target sequences (`data$y`), involved antibody residue (`data$res`), antibody (`data$antibody`), variant (`data$variant`). These attributes can be used to filter subsets of the training data. If an affinity score threshold is given (argument `a0`), an optinonal `data$group` attribute will be added (this will be 0 for a stable contact and 1 for an unstable one). The LSTM input file can be then generated from this data.frame as a tab-separated text file.
 
 The lstmContacts software already comes with two learning sets derived from the internal contact library, with interval size 5 and 10 nanoseconds (**contactLibrary_t5.txt** and **contactLibrary_t10.txt**, respectively). If one of these datasets are used, the library preparation step is not required.
 
