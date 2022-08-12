@@ -585,8 +585,9 @@ This function takes the prediction set (or validation set), the encoder and deco
 The figure below shows the comparison between the LSTM predictions (solid lines) against the search module ones (dotted lines), for the Tixagevimab-*beta* (blue) and the Bamlanivimab-*beta* (red) complexes. LSTM predictions are commonly done in percent values (0 to 100), therefore the two predicted time series (stored in the pmd.7l7d.beta and pmd.7kmg.beta variables, respectively) are divided by 100.
 
 ```r
-# R code for the figure below
-# pmd.7l7d.beta and pmd.7kmg.beta objects correspond to pmd_7l7d_beta and pmd_7kmg_beta from the LSTM module
+# R code for the figure below:
+# pmd.7l7d.beta and pmd.7kmg.beta objects correspond to pmd_7l7d_beta and pmd_7kmg_beta from the LSTM module;
+# the profile object is the output of the search module.
 
 png("~/lstmContacts_LSTM_predictions_vs_manual.png", width = 20, height = 10,
     units = 'in', res = 400)
