@@ -195,7 +195,7 @@ def lstmTraining(data, n, units = 128, epochs = 100, subset = 1):
 	return model, encoder, decoder
 
 
-def lstmProfile(data, encoder, decoder, t0, t1, n, maxdist = 5,
+def lstmProfile(data, encoder, decoder, t0, t1, n, maxdist = 3,
                 maxsum = 15, chunk = 100, method = "median"):
 	
 	V1, V2, Vy = getDataset(data[1])
