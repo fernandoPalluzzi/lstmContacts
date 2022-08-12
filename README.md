@@ -587,6 +587,7 @@ The figure below shows the comparison between the LSTM predictions (solid lines)
 ```r
 # R code for the figure below
 # pmd.7l7d.beta and pmd.7kmg.beta object correspond to pmd_7l7d_beta and pmd_7kmg_beta from the LSTM module
+
 png("~/lstmContacts_LSTM_predictions_vs_manual.png", width = 20, height = 10,
     units = 'in', res = 400)
 plot(pmd.7l7d.beta/100, type = "l", lwd = 4, col = "blue",
