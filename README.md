@@ -587,7 +587,8 @@ The figure below shows the comparison between the LSTM predictions (solid lines)
 
 ```r
 # R code for the figure below:
-# pmd.7l7d.beta and pmd.7kmg.beta objects correspond to pmd_7l7d_beta and pmd_7kmg_beta from the LSTM module;
+# pmd.7l7d.beta and pmd.7kmg.beta objects correspond to pmd_7l7d_beta and pmd_7kmg_beta from
+# the LSTM module;
 # the profile object is the output of the search module.
 
 png("~/lstmContacts_LSTM_predictions_vs_manual.png", width = 20, height = 10,
