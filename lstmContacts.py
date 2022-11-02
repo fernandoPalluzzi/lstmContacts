@@ -182,7 +182,7 @@ def tspredict(encoder, decoder, source, t, n):
 	return array(output)
 
 
-def lstmTraining(data, n, units = 128, epochs = 100, subset = 1):
+def lstmTraining(data, n, units = 128, epochs = 100, subset = 0):
 	
 	model, encoder, decoder = lstmModel(n, n, units)
 	model.compile(optimizer = 'adam', loss = 'categorical_crossentropy',
