@@ -17,7 +17,7 @@ conda activate
 # Install the TensorFlow environment
 conda env create -f tfenv.yml
 
-# Deactivate the base environment
+# Deactivate the base environment. If active, a "(base)" label precedes the Bash command prompt.
 conda deactivate
 
 # Activate the TensorFlow-GPU environment
@@ -29,7 +29,7 @@ python
 # Type CTRL-D to exit and deactivate the environment
 conda deactivate
 
-# -------------------------------------------------------------#
+# ------------------------------------------------------------ #
 
 # For completeness, the list of Python imports is shown below:
 
