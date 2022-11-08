@@ -57,6 +57,7 @@ parser.add_argument("-p", "--plotname",
 args = parser.parse_args()
 
 tset = contactLibrary(filename = contactlib)
+pset = contactLibrary(filename = pset)
 
 model, encoder, decoder = lstmTraining(tset, n = args.nfeatures, units = args.units, epochs = args.epochs)
 
