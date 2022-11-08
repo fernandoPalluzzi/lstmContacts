@@ -62,4 +62,4 @@ model, encoder, decoder = lstmTraining(tset, n = args.nfeatures, units = args.un
 
 profile = lstmProfile(pset, encoder, decoder, t0 = args.tin, t1 = args.tout, n = args.nfeatures, method = args.method)
 
-plotProfile(profile, threshold = args.cutoff)
+plotProfile(profile, where = args.plotname, threshold = args.cutoff)
