@@ -120,7 +120,7 @@ def getDataset(x, b = 100, t = 100, h = 0, rounded = False):
 	
 	return array(x0), array(x1), array(y)
 
-
+lstmContacts_testGPU.sh
 def onehotEncode(seq, u):
 	encoded = list()
 	for x in seq:
@@ -224,3 +224,31 @@ def lstmProfile(data, encoder, decoder, t0, t1, n, maxdist = 3,
 	elif method == "mean":
 		profile = mean(profile, axis = 0)
 	return profile
+
+
+def is_stable(profile, threshold = 88):
+	if median(profile) < threshold:
+		return False
+	return True
+
+
+def plotProfile(profile, expected = None, where = 'myprofile.pdf',
+                color = 'blue', threshold = 88, tcolor = 'darkred',
+                tstyle = 'dashed', amin = 0, amax = 100,
+                ecolor = 'blue', estyle = 'dotted', dpi = 600,
+                title = 'Antigen-Antibody time series'):
+	plt.plot(profile, color)
+	if expected != None:
+		plt.plot(expected, color = ecolor, style = estyle)
+	plt.plot([threshold]*len(profile), color = tcolor, linestyle = tstyle)
+	plt.ylim(amin, amax)
+	if is_stable(profile, threshold = threshold):
+		stability = 'stable\ complex'
+	else:
+		stability = 'unstable\ complex'
+	plt.title(title + ' \n$ \it{' + stability + '} $', fontsize = 12)
+	plt.xlabel('ns', fontsize = 10)
+	plt.ylabel('Affinity score', fontsize = 10)
+	plt.savefig(where, dpi = dpi)
+	plt.clf()
+	plt.close()
