@@ -3,10 +3,6 @@ The **lstmContacts** software characterizes and draws atigen-antibody interactio
 
 ![alt text](https://github.com/fernandoPalluzzi/lstmContacts/blob/main/figures/lstmContacts_scheme.png)
 
-## Quick start
-
-...
-
 ## Requirements
 
 The **lstmContacts** software is designed for **Unix-based systems**.
@@ -66,6 +62,10 @@ Please, be sure to have execution rights for the ~/lstmContacts/lstmContacts.py 
 ```
 chmod 700 ~/lstmContacts/lstmContacts.py
 ```
+
+## Quick start
+
+...
 
 &nbsp;
 
