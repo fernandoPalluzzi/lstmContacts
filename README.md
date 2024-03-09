@@ -109,7 +109,7 @@ The `preprocess(vj)` function of the R module assigns the best possible ai vecto
 7     Thryptophan Trp    W  aromatic             Nonpolar neutral, large
 8        Tyrosine Tyr    Y  aromatic            Polar hydrophobic, large
 9      Asparagine Asn    N     polar                     Polar uncharged
-10      Glutamine Glu    Q     polar                     Polar uncharged
+10      Glutamine Gln    Q     polar                     Polar uncharged
 11         Serine Ser    S     polar                     Polar uncharged
 12      Threonine Thr    T     polar                     Polar uncharged
 13       Arginine Arg    R     basic                         Charged (+)
