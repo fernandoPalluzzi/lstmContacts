@@ -554,13 +554,13 @@ The first step is the definition of the training set. The input should be a tab-
 The only mandatory attributes, **a** and **y**, should be specified as a comma-separated list of affinity score values, ranging from 0 to 1. For the example below, we will use the training dataset **contactLibrary_t5.txt** (5 nanoseconds intervals), given with this repository. Firstly, we import the training dataset with the `contactLibrary()` function:
 
 ```python
-tset = contactLibrary(filename = "~/contactsCore/contactLibrary_t5.txt")
+tset = contactLibrary(filename = "~/lstmContacts/contactLibrary_t5.txt")
 ```
 
 The training can be also restricted to the variants and antibodies indicated by the search module (the ones below are those indicated by the example in section 2.1, Bamlanivimab-*beta* complex):
 
 ```python
-tset = contactLibrary(filename = "~/contactsCore/contactLibrary_t5.txt",
+tset = contactLibrary(filename = "~/lstmContacts/contactLibrary_t5.txt",
                       variant = "beta, omicron, delta, wt",
                       antibody = "7kmg, 7cm4, 7l7d")
 ```
@@ -576,7 +576,7 @@ To do so we feed the `lstmTrining()` function with the training set, the number 
 Now that we trained the model, we should define a set of target sequences to be predicted, given a set of source ones (i.e., a prediction set). Following the example in section 2.1, we could try to draw the Bamlanivimab-*beta* complex time series, and compare these results with those from the search module. Thus, we define the prediction set as follows:
 
 ```python
-pset = contactLibrary(filename = "~/contactsCore/contactLibrary_t5.txt",
+pset = contactLibrary(filename = "~/lstmContacts/contactLibrary_t5.txt",
                       variant = "beta",
                       antibody = "7kmg")
 ```
