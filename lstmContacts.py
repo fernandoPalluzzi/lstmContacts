@@ -120,7 +120,6 @@ def getDataset(x, b = 100, t = 100, h = 0, rounded = False):
 	
 	return array(x0), array(x1), array(y)
 
-lstmContacts_testGPU.sh
 def onehotEncode(seq, u):
 	encoded = list()
 	for x in seq:
